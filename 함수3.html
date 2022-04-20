@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+    <meta charset="UTF-8">
+
+<script>
+    // 함수안의 함수는 함수안에서 밖에 콜이 안된다. 밖에서는 못부름
+    var caclulator = function (p_op) {
+        // 함수를 리턴하는 함수
+        if(p_op=="+"){
+            return function (a,b) {
+            
+                return a+b;
+            }
+        }
+        if(p_op=="-"){
+            return function (a,b) {
+            
+                return a-b;
+            }
+        }
+    }
+    var f_add = caclulator("+");
+    console.log(f_add(3,4));
+    var f_minus = caclulator("-");
+    console.log(f_minus(7,4));
+    
+</script>

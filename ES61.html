@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var v_str = "안녕하세요";
+        // v_str += "안녕" +v_str  // 기존 문자열 더하기방식
+        v_str = `안녕 ${v_str}`; // Template String 방식이라고 부름
+
+        var v_obj = {
+            name : "박경신",
+            habit : "음악감상"
+        }
+        var {habit} = v_obj; // 구조분해
+        // var habit = v_obj.habit; 위의 내용과 정확히 같다.
+        alert(habit);
+    </script>
+</body>
+</html>

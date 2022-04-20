@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+#id_disp {
+    width:200px;
+    height:200px;
+    border: 3px solid pink;
+}
+</style>
+</head>
+<body>
+<div id="id_disp"></div>
+<input type="file" multiple name="nm_file" id="id_file" accept=".jpg,.png"> 
+<!-- multiple 은 파일여러개 선택하는 속성 accept -> 확장자 제한하는 속성-->   
+<script>
+    var v_disp = document.querySelector("#id_disp");
+// 스크립트에선 사용자가 선택해준 파일만 읽을 수 있음
+// 사용자 시스템에 쓰는건 불가능(보안상의 이유)
+    var v_fileBtn = document.querySelector("#id_file"); 
+    // 보통 change이벤트를 주로 걸어서 사용(실제 다른이벤트를 )
+    var f_chagne = function () {
+        // input type = file의 가장중요한 속성 files
+        console.log(v_fileBtn.files.length)
+        // var v_file = v_fileBtn.files[0]; // 파일리스트 안 파일 객체 뽑기
+        var v_file = v_fileBtn.files; // 파일리스트 안 파일 객체 뽑기
+        for (let i = 0; i < v_file.length; i++) {
+            
+            console.log(v_file[i])
+        }
+        var v_fillReader = new FileReader(); // 파일 읽어주는 객체 생성
+        // 파일을 다읽으면 onload 이벤트 발생 (비동기->NonBlocking
+        v_fillReader.onload = function () {
+            console.log("ddd")
+            // 읽은 결과를 result라는 정해진 속성에 넣어줌
+            var v_img = document.createElement("img");
+            v_img.src = v_fillReader.result;
+            v_img.width = 200;
+            v_img.setAttribute("height", 200);
+            // document.body.removeChild(v_img)
+            v_disp.innerHTML = "";
+            v_disp.appendChild(v_img);
+
+            console.log(v_fillReader.result)
+        }
+        // v_fillReader.readAsText 텍스트파일 읽을떄 쓰는거 
+        v_fillReader.readAsDataURL(v_file); // 웹기준 binary 데이터
+        // console.log("비동기")
+    }
+    v_fileBtn.addEventListener("change",f_chagne)
+
+</script>
+</body>
+</html>

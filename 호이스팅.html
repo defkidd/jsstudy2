@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+       
+        // 원래 자바스크립트는 완벽한 인터프리터(interpreter)방식이었음
+        // 컴파일(Compile) 방식 - C언어 -> 전체코드를 한번에 어셈블리코드로 변환 ( 빠르다)
+        // JAVA Write ONce Run EveryWhere // 단 JRE(Java Runtime Environment),JDK가 OS별로 설치되어
+        // 있어야 한다
+        f_aaa();
+        /*
+        function f_aaa() { // 정상적 함수 선업법에서만 hoistingㅇ ㅣ가능하다.
+            alert("호이스팅")
+        }
+        */
+       
+        var f_aaa = () => { // hoisting 안됨 . 선언문법이 아니라 표현식이라서
+            alert("호이스팅2")
+        }
+    </script>
+</body>
+
+</html>

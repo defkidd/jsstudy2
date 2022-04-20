@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 매개변수 , 못받은 값은 undefined
+    // function안에만 쓸수 있는 ruturn값을 되돌려주는 기능
+    // function을 종료하는 기능, return 다음 줄은 실행 안됨
+function myRoze(p_arg1,p_arg2,p_arg3) {
+    // console.log(p_arg1+p_arg2+p_arg3);
+    // return "안녕";
+    // alert('리턴문뒤에는 실행안됨~');
+
+    if (p_arg1 =="로제") {
+        console.log("안녕 로제");
+        return;
+    } 
+        console.log("넌 누구냐?>");
+    
+}
+myRoze("안녕","로제");
+console.log(myRoze("안녕","로제"));
+console.log(myRoze("로제"));
+</script>

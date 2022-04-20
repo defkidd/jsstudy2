@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- js 라이브러리 생성.-->
+    <script src="./myajax.js"></script>
+</head>
+
+<body>
+    <input type="button" value="눌러" id="id_btn">
+    <div id="id_disp" style="border: 1px solid black;"></div>
+    <script>
+
+        
+        // 
+        var cnt = 0;
+        var v_btn = document.querySelector("#id_btn");
+        var tblWidth = 0;
+        function show() {
+            if (cnt % 2 == 0) {
+                console.log("짝수");
+                v_tblStr = '';
+                document.querySelector("#id_disp").style.display = "none";
+
+            } else {
+                // document.querySelector("#id_disp").style.display = "";
+                // document.querySelector("#id_disp").style.width = 150 + "px";
+            }
+        }
+        v_btn.addEventListener("click", function () {
+            cnt++;
+            if (cnt == 1) {
+
+
+                $.ajax({
+                    dataType: "text",
+                    async: true,
+                    method: "get",
+                    url: "./data.csv",
+                    success: function (p_rslt) {
+                        // console.log((p_rslt).split("\n"));
+                        var v_tblStr = "<table id='id_tbl' class='xx' border=1>";
+                        v_tblStr += "<tr><th>이름</th><th>나이</th><th>특기</th></tr>"
+                        var p_rsltArray = p_rslt.split("\n")
+                        // var p_rsltObject = "";
+                        for (var i = 1; i < p_rsltArray.length; i++) {
+
+                            v_tblStr += `<tr>
+                                            <td>${p_rsltArray[i].split(",")[0]}</td>
+                                            <td>${p_rsltArray[i].split(",")[1]}</td>
+                                            <td>${p_rsltArray[i].split(",")[2]}</td>
+                                        </tr>`;
+
+                        }
+                        v_tblStr += "</table>";
+
+                        document.querySelector("#id_disp").innerHTML = v_tblStr;
+                        var tbl = document.querySelector("#id_tbl");
+                        // console.log(tbl.offsetWidth)
+                        var tblWidth = tbl.offsetWidth
+                        document.querySelector("#id_disp").style.width = tbl.offsetWidth + "px";
+
+
+
+
+                    }
+                })
+
+            } //if 끝
+            else if (cnt % 2 == 0) {
+                // console.log("짝수");
+                // v_tblStr = '';
+                document.querySelector("#id_disp").style.display = "none";
+                // return
+
+            } else {
+                document.querySelector("#id_disp").style.display = "";
+            }
+            // console.log(cnt)
+        })
+
+        // $.ajax({
+        //     dataType:"JSON",
+        //     async:true,
+        //     method:"get",
+        //     url:"./data.txt",
+        //     success:function (p_rslt) {
+        //         // 넘어온값으로 잘 사용하기
+        //         // p_rslt 는 responseText를 가져왔으므로 기본적으로 문자열
+        //         // console.log(JSON.parse(p_rslt));
+        //         console.log((p_rslt));
+        //     }
+        // })
+        alert("동기확인")
+    </script>
+</body>
+
+</html>

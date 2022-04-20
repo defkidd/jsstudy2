@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./jsp.js"></script>
+    <title>Document</title>
+
+</head>
+<body>
+    <script>
+        // alert(location.href)
+        
+        function searchParam(key) {
+            return new URLSearchParams(location.search).get(key);
+        };
+        function searchParamDuplicate(key) {
+            if (new URLSearchParams(location.search).getAll(key).length ==0) {
+                return null
+            }
+            return new URLSearchParams(location.search).getAll(key) ;
+        };
+        // var v_title =  location.href.split("?")[1].split("&").split("=")[0];
+        // decodeURIComponent(v_title); // 디코딩하기
+        // encoding decoding 세트
+        // escape unescape  예전 세트
+        // encodeURI decodeURI 조금 예전 세트
+        // encodeURIComponent decodeURIComponent  요즘사용세트
+        // 개발자라면 상황이 정리가 안 된듯 보인다면 일반화(추상화)를 시도해 봅니다.
+        
+        // console.log(request.getParameter("nm_content"));
+        // console.log(searchParam("nm_skills"));
+        var v_title =  searchParam("nm_title");
+        var v_writer =  searchParam("nm_wirter");
+        var v_skills = searchParamDuplicate("nm_skills");
+        var v_content =  searchParam("nm_content");
+
+        var v_tblName = "Gesi"; // 일단 테이블명(key값)은 Gesi로
+        // 따로 따로 저장하지 않고 1개의 객체로 묶기
+        var v_gul ={};
+        v_gul.pid = 1;
+        v_gul.v_title = v_title;
+        v_gul.v_writer= v_writer;
+        v_gul.v_skills = v_skills;
+        v_gul.v_content= v_content;
+        // 1개로 묶었으니 해당객체를 저장하묀 됨
+        // localstrorage 는 문자열 저장기능만 지원(객체는 )
+
+        console.log(localStorage.getItem(v_tblName));
+        // 이미써진 글이 있는지 없는지 확인필요
+        var v_gulDatas= []; // v_gul을 담을 빈배열선언
+        if (localStorage.getItem(v_tblName)) {
+            v_gulDatas = JSON.parse(localStorage.getItem(v_tblName));
+            v_gul.pid = v_gulDatas[v_gulDatas.length-1].pid+1;
+
+        }   
+        v_gulDatas.push(v_gul);
+
+        localStorage.setItem(v_tblName,JSON.stringify(v_gulDatas)) ; // strigify = serialize
+        // 덮어써지는 문제 발생
+
+        alert("잘 저장되었습니다.") // 잘저장되어있으면 리스트로 이동
+        location.href="list.html"; // 서버에 다시 요청안하고 캐쉬던걸 사용할 수도 있음
+        // location.replace("list.html"); // 서버에 필히 다시 요청
+
+
+        // console.log(v_title[0])
+        // console.log(v_writer[0])
+        
+        // console.log(v_skills.length)
+        // console.log(v_content)
+    </script>
+</body>
+</html>

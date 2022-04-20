@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 자바의 ArrayList를 만드시오
+        // add, get,set, remove, clear 메소드 추가
+
+        var java = {};
+        java.io = {};
+        
+        // let ArrayList = function () {
+        java.io.ArrayList = function () {
+            this.size = 0;
+            return this;
+        }
+        ArrayList.prototype.add = function (p_val) {
+            if (arguments.length == 2) {
+                return ArrayList.prototype.addIdx(arguments[0], arguments[1], this)
+            }
+            this[this.size] = p_val;
+            this.size++;
+            return this;
+
+        }
+        ArrayList.prototype.addIdx = function (p_index, p_element, ths) {
+            // // console.log(ths)
+            console.log(typeof (p_index))
+            // console.log(p_element)
+            try {
+                ArrayList.prototype.rangeCheck(p_index, ths.size)
+            } catch (e) {
+                console.error(e)
+                alert(e)
+            }
+            this.size = 0
+            // console.log(this.size)
+            // console.log(p_index)
+            // console.log(ths)
+            var temp = 0;
+            if (p_index == ths.size - 1) {
+                temp = ths[ths.size - 1]
+                ths[ths.size] = temp
+                ths[p_index] = p_element
+                ths.size++;
+                return ths;
+            }
+            for (let i = ths.size; i > p_index; i--) {
+                // console.log(i)
+                temp = ths[i - 1]
+                ths[i - 1] = ths[i]
+                ths[i] = temp
+                // console.log(temp)
+            }
+            ths[p_index] = p_element
+            ths.size++;
+
+            return ths;
+        }
+        ArrayList.prototype.rangeCheck = function (p_index, p_size) {
+            // console.log(p_size)
+            if (p_index >= p_size || p_index < 0 || isNaN(p_index)) {
+                throw ('인덱스오류')
+            }
+        }
+        ArrayList.prototype.get = function (p_index) {
+            try {
+                ArrayList.prototype.rangeCheck(p_index, this.size)
+            } catch (e) {
+                console.error(e)
+                alert(e)
+                return this;
+            }
+            return this[p_index];
+        }
+        ArrayList.prototype.set = function (p_index, p_element) {
+            try {
+                ArrayList.prototype.rangeCheck(p_index, this.size)
+            } catch (e) {
+                console.error(e)
+                alert(e)
+                return this;
+            }
+            this[p_index] = p_element
+            return this
+        }
+
+        ArrayList.prototype.remove = function (p_index) {
+            try {
+                ArrayList.prototype.rangeCheck(p_index, this.size)
+            } catch (e) {
+                console.error(e)
+                alert(e)
+                return this;
+            }
+            // console.log(ArrayList()[2])
+            // this[i] = this[i+1]
+            for (let i = p_index; i < this.size - 1; i++) {
+                // console.log(temp)
+                temp = this[i + 1]
+                this[i + 1] = this[i]
+                this[i] = temp
+                // console.log(i)
+                // console.log(temp)
+            }
+            delete this['' + this.size - 1 + '']
+            this.size--;
+            return this;
+        }
+        ArrayList.prototype.clear = function () {
+            for (let index = 0; index < this.size; index++) {
+
+                delete this[`${index}`];
+            }
+            this.size = 0;
+        }
+        // console.log(new Number(111))
+        // nm = 1
+        // console.log(nm)
+        let MyArrayList = new ArrayList();
+        MyArrayList.add();
+        MyArrayList.add("2");
+        MyArrayList.add("3");
+        MyArrayList.add("4");
+        MyArrayList.add("5");
+        MyArrayList.add("6");
+        MyArrayList.add("7");
+        console.log(MyArrayList.size)
+        // MyArrayList.add(2,"dfddf");
+        // console.log(MyArrayList)
+        // MyArrayList.remove(8);
+        console.log(MyArrayList)
+        MyArrayList.clear()
+        console.log(MyArrayList)
+        // console.log(MyArrayList.get(6))
+        // MyArrayList.set(1,null)
+        // console.log(MyArrayList)
+    </script>
+</body>
+
+</html>

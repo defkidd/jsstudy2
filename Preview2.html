@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #id_disp {
+        width: 200px;
+        height: 200px;
+        border: 3px solid pink;
+    }
+
+</style>
+<body>
+    <div id="id_disp">
+        여기에 파일을 끌어서 집어넣어라.
+
+    </div>
+    <script>
+        var v_disp = document.querySelector("#id_disp");
+        var f_file = function (p_file,p_length) {
+            // 거의 이런식으로 쓰니깐, 잘 이해하기.
+            var v_fileReader = new FileReader();
+            v_fileReader.onload = function () {
+                var v_img = document.createElement("img");
+                v_img.src = v_fileReader.result;
+                v_img.width =50;
+                // v_img.width =200;
+                v_img.height = 200;
+                v_disp.appendChild(v_img);
+            }
+            v_fileReader.readAsDataURL(p_file)
+        }
+        // dargover 와 drop 2 이벤트 모두 막아야함
+        var f_dragOver = function () {
+            event.preventDefault(); // built - in 기능 막기
+            event.stopPropagation(); // 이벤트 전파막기
+        }
+        var f_drop = function () {
+            console.log(event.dataTransfer.files)
+            
+            event.preventDefault(); // built - in 기능 막기
+            event.stopPropagation(); // 이벤트 전파막기
+            v_disp.innerHTML = ""; // 이전꺼 지우기
+            var v_files = event.dataTransfer.files;
+            for (let i = 0; i < v_files.length; i++) {
+                f_file(v_files[i],v_files.length)
+            }
+        
+            
+        }
+        v_disp.addEventListener("dragover",f_dragOver)
+        v_disp.addEventListener("drop",f_drop)
+        // document.addEventListener("drop",f_dragOver)
+        // document.addEventListener("dragover",f_dragOver)
+        window.addEventListener("drop",f_dragOver)
+        window.addEventListener("dragover",f_dragOver)
+    </script>
+</body>
+</html>

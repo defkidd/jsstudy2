@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #id_ball {
+        width: 50px;
+        height: 50px;
+        background-color: red;
+        border-radius: 50%;
+        
+    }
+    #id_bar {
+        position: absolute;
+        width: 150px;
+        height: 20px;
+        background-color: blueviolet;
+    }
+</style>
+</head>
+    <input type="button" value="눌러" onclick="f_move(),f_count()">
+    <input type="button" value="멈춰" onclick="f_stop()">
+    <div id="id_ball" style="position:absolute;left:0px;top:200px;"></div>
+    <div id="id_bar" style="left:10px;top:400px;"></div>
+<body>
+    <script>
+        var v_ball = document.querySelector("#id_ball");
+        //문제 오른쪽에 닿으면 방향이 반대로 되게
+        var v_mvWidth = 10; // 좌우이동폭
+        var v_mvHeight = 10;// 위아래
+        var v_timerId;
+        var bar_move =10;
+        var v_wndWidth = window.innerWidth;
+        var cnt=0;
+        var cnt2=0;
+        // function f_move() {
+        //     v_ball.style.left = parseInt(v_ball.style.left) + v_mvWidth+"px";
+        //     setTimeout(f_move,500); //함수 이름만 써줘야 함(Function Pointer)
+        //     if(parseInt(v_ball.style.left) +50 >= window.innerWidth){
+        //         f_moveLeft()
+                
+        //     }
+        //     function f_moveLeft() {
+        //         v_ball.style.left = parseInt(v_ball.style.left)- v_mvWidth+"px";
+        //         setTimeout(f_moveLeft,500);
+        //     }
+        //     if (parseInt(v_ball.style.left) == 0) {
+        //         setTimeout(f_move,500);
+        //     }
+        // }
+        // }
+         function f_stop() {
+            for(var i = 0; i<cnt; i++){
+
+                clearTimeout(v_timerId);
+            }           
+        } 
+        function f_count() {
+            cnt++;
+            
+        }   
+        function f_move() {
+           
+            v_ball.style.left = parseInt(v_ball.style.left) + v_mvWidth+"px";
+            v_ball.style.top = parseInt(v_ball.style.top) + v_mvHeight+"px";
+
+            if(parseInt(v_ball.style.left) +50 >= window.innerWidth || 
+            (parseInt(v_ball.style.left)<=0) ){
+                v_mvWidth=-v_mvWidth; //부호만 체인지
+                
+            }
+            if (parseInt(v_ball.style.top)+50>= window.innerHeight ||
+            (parseInt(v_ball.style.top)<=0)) {
+                v_mvHeight=-v_mvHeight;
+            }
+            if(parseInt(v_ball.style.top)+50 >= parseInt(v_bar.style.top) &&
+            parseInt(v_ball.style.left) +50 >=parseInt(v_bar.style.left) 
+            &&  parseInt(v_ball.style.left) +50 <=parseInt(v_bar.style.left) +150){
+                v_mvHeight=-v_mvHeight;
+
+            }
+            if (parseInt(v_ball.style.top) > parseInt(v_bar.style.top)) {
+                // cnt2++;
+                // clearTimeout(v_timerId);
+                alert("게임오버")
+                console.log("1")
+                // // gameOver()
+                // for(var i = 0; i<cnt; i++){
+                //     console.log(cnt)
+                //     clearTimeout(v_timerId);
+                //     // console.log((clearTimeout(v_timerId)))
+                //     // alert(i)
+                    
+                // }           
+                // v_ball.style.top=200;
+                // v_ball.style.left=0;
+                // console.log(v_ball.style.top)
+                return;
+                
+            }
+        
+            v_timerId = setTimeout(f_move,500); //함수 이름만 써줘야 함(Function Pointer)
+            
+        }
+        
+       
+        // window size 변경 이벤트
+        window.addEventListener("resize", function() {
+            // console.log(window.innerWidth);
+            
+        });
+        // keyDown과 keyPress의 차이점
+        // 위38 아래40 오른쪽39 왼쪽37
+        var v_bar = document.querySelector("#id_bar");
+        var f_keyDown = function () {
+            // alert(event.keyCode); // 키값 확인
+            // alert(event.key) //키값 확인
+            if(event.keyCode == 40){
+                console.log("아래")
+            }
+            if(event.keyCode == 38){
+                console.log("위")
+            }
+            
+            if(event.keyCode == 39){
+                if (parseInt(v_bar.style.left)+150 >=window.innerWidth) {
+                  
+                    console.log("오른쪽벽이다")
+                }else {
+                    v_bar.style.left = parseInt(v_bar.style.left) + bar_move+"px";
+                } 
+                
+            }
+            if(event.keyCode == 37){
+                if (parseInt(v_bar.style.left) ==0) {
+                    console.log("벽이다")
+                } else{
+
+                    v_bar.style.left = parseInt(v_bar.style.left) - bar_move+"px";
+                }
+              
+            }
+        }
+        window.addEventListener("keydown",f_keyDown);
+        // alert(window.innerHeight); //사용자가 보는 윈도우 높이
+        // alert(window.innerWidth); // 사용자가 보는 윈도우 넓이
+        </script>    
+</body>
+</html>

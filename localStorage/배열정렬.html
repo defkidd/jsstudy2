@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // var v_arr = [1,4,2,3,7,11]; 간단한 배열
+        var v_arr = [
+            {pid:1,name:"로제"},
+            {pid:4,name:"지수"},
+            {pid:3,name:"리사"},
+            {pid:2,name:"제니"},
+        ]
+        v_arr.sort()
+        console.log(v_arr)
+        v_arr.sort(function (a,b) {
+            console.log(a.pid,b)
+            console.log(a.pid)
+            return b.pid-a.pid;
+        })
+        console.log(v_arr)
+
+    </script>
+</body>
+</html>

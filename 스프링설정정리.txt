@@ -1,0 +1,19 @@
+1. STS(3914), Tomcat(9), tern(121), Maven Download
+2. STS 실행후 Tern-Plugin(자바스크립트 자동완성) 설치
+3. encoding 먼저 UTF-8로 설정(안하면 나중에 문제 생김)
+4. 새 프로젝트 Legacy - > MVC
+5. Marker/Problem 오류 해결  -> Project-Facets -> 버전 맞춰줌 -> tomcat 추가 
+-
+6. pom.xml 수정 - > 자바버전 (최신으로 ), Servlet 버전,build tool 버전(최신으로)
+--> scope compile(컴파일에도사용, 배포에도 추가), runtime,provided,test
+7. web.xml Servlet 버전 맞추기
+8. convert to tern project 선택
+
+
+
+
+DispatcherServlet(URL요청) - > Spring DispatcherServlet(URL요청) -> ControllerMapper
+@Controller - > 해당 URL을 처리할 클래스
+@RequestMapping - > URL적어주기
+@RequestParam -> 요청 URL을 통해서 넘겨온 값처리
+@ResponseBody - > view(jsp)로 안보내고 ,바로 브라우져로 전송 [Jackson 라이브러리 필요]

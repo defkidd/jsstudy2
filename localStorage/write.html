@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- 검색엔진에 걸리는 언어.. 이페이지가 어떤언어를 담고있는지 알려준다.-->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>아주 볼품없는 게시판</h1>
+    <form action="write_action.html">
+        제목 : <input type="text" name="nm_title" id="" value="박경신짱" required><br>
+        글쓴이 : <input type="text" name="nm_wirter" id="" value="박경신" required><br>
+        글쓴이 스킬 :<br>
+        JS<input type="checkbox" name="nm_skills" id="id_js" value="js" onclick="count(this.id);">
+        스프링<input type="checkbox" name="nm_skills" id="id_spring" value="spring" onclick="count(this.id)">
+        파이썬<input type="checkbox" name="nm_skills" id="id_python" value="python" checked onclick="count(this.id)">
+        오라클<input type="checkbox" name="nm_skills" id="id_oralce" value="oracle" onclick="count(this.id)"><br>
+        <hr>
+        내용 : <br>
+        <textarea cols="40" rows="5" name="nm_content" required>내용</textarea><br>
+        <input type="submit" value="글쓰기"> 
+    </form>
+    <script>
+       
+        var checked= [];
+        // console.log(document.getElementsByTagName("input").getAttribute("checkbox"))
+        // console.log(document.querySelectorAll("input"))
+        var input ;
+        input = (document.querySelectorAll("input"));
+        // console.log(input)
+        // console.log(input)
+        console.log(input.length)
+        for(var i = 0; i< input.length; i++){
+            var type = input[i].getAttribute("type");
+            if (type =="checkbox") {
+                if (input[i].checked) {
+                    console.log(input[i].id);
+                    checked.push(input[i].id)
+                }
+            }
+            console.log("fd")
+        }
+        console.log(checked)
+
+
+        // // alert("스크립트")
+        // document.querySelector("#id_js")
+        // console.log(document.querySelector("#id_js"))
+        var cnt = 1
+        // var count = function (ths) {
+        //     var array = [];
+
+        //     cnt ++;
+        //     console.log(ths)
+        // }
+        var count = function (id) {
+            // console.log(checked.indexOf(id))
+            // if (checked.length>2) {
+            //     alert("3개이상 안됨")
+            //     return;
+            // }
+            // console.log(checked.length)
+            if (checked.indexOf(id) == -1) {
+                if (checked.length +1 > 3) {
+                    alert("3개까지만 선택가능해요")
+                    document.querySelector("#"+id+"").checked=false;
+                    return
+                }
+                checked.push(id);
+                // console.log(checked.length)
+                
+            } else {
+                for(var i = 0 ; i < checked.length; i++){
+                    if (checked[i]== id) {
+                        checked.splice(i,1);
+                    }
+                }
+                // checked.pop(id)
+                // console.log(id)
+                // console.log("pop")
+            }
+            
+            // console.log(checked)
+            cnt ++;
+        }
+    </script>
+
+</body>
+</html>

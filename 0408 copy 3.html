@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>하트맹글기</title>
+<style>
+    #myHeart {
+        /* border:5px solid pink; */
+        left:-20px;
+        top:130px;
+        position: relative; /* static relative absolute fixed */
+        width:100px; height: 100px;
+        overflow: hidden; /* 내 영역을 벗어난 자식 숨기깅 */
+        transform-origin:right center;       /* 회전의 중심을 설정*/
+        transform: rotate(45deg); /* 하트가 누웠으니 세워주시옹 */
+    }
+    .right {
+        position:absolute;
+        left:50px;
+        width:100px; height:100px;
+        background-color: red;
+        border-radius: 50%; /* 모서리 둥글게 둥글겡*/
+    }
+    .bottom {
+        position:absolute;
+        top:50px;
+        width:100px; height:100px;
+        background-color: red;
+        border-radius: 50%; /* 모서리 둥글게 둥글겡*/
+    }
+    #bar {
+        position: absolute;
+        left:40px; top:0px;
+        width:20px;
+        height:150px;
+        background-color: blueviolet;
+    }
+    #point {
+        position: absolute;
+        left:30px;
+        top:-20px;
+        width:40px;
+        height:40px;
+        background-color: brown;
+        border-radius: 50%;
+    }
+    #total {
+        width:100px;
+        height:200px;
+        position: relative;
+        transform-origin: center top;
+        left:100px;
+        top:100px;
+       /* border:1px solid black;*/ /*디버깅용*/
+    }
+    div {
+        display: inline-block;
+    }
+    #heartWrap {
+        position: absolute;
+        left:0px; top:0px;
+    }
+</style>
+</head>
+<body>
+     <div id="total"><!--하트 막대 동글뱅이 다 넣은 거-->
+        <div id="hearWrap"> 
+            <div id="myHeart">
+                <div class="right"></div>
+                <div class="bottom"></div>
+            </div>
+         </div>
+         <div id="bar"></div>
+         <div id="point"></div>        
+     </div>
+<script>
+    var v_total = document.querySelector("#total");
+    var v_gakInc=5; //각도 증가값
+    var v_gak =0;    //각도 초기값
+    var f_rotate = function(){
+        v_gak = (v_gak + v_gakInc) % 360;
+        v_total.style.transform = "rotate(" + v_gak + "deg)";
+        if(v_gak >=45 || v_gak <= -45){
+            v_gakInc = -v_gakInc;
+        }
+        setTimeout(f_rotate,200);
+    }
+    f_rotate();
+</script>
+</body>
+</html>

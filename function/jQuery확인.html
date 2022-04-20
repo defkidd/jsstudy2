@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 일반적으로 jQuery는 CDN 사용 권장-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 여러버전을 등록하지마라-->
+</head>
+<body>
+    <div>aaa</div>
+    <div>bbb</div>
+    <div>ccc</div>
+    <div>ddd</div>
+    <input type="checkbox" name="" id="id_ck" value="aa" checked>
+    <script>
+        // attr vs prop
+        // 혼자 쓰이는 속성들은 prop을 이용 , 나머지는 attr을 이용
+        $("div").html("def");
+        $("div").css("color", function (p_index,p_val) {
+            return "blue";
+        })
+        // 위에보다 아래처럼 쓰는게좋다. 객체를 변수에 담아서, 제이쿼리 가 어쩔수없이 for문을 도는것을 줄인다
+        // 성능 저하를 최소화하는것...!!!!!! 자주쓰는건 변수로 담아라.
+        var $div = $("div").html("def");
+        $div.css("color", function (p_index,p_val) {
+            return "blue";
+        })
+
+        // javascript와 jQuery 같이 쓰기
+        //  현실적으로 같이 쓰는게 지금은 유리
+
+        var v_ckbox = document.querySelector("#id_ck");
+        // v_ckbox.checked = false;
+        // jQuery 에서 편한 메소드를 제공해줄때 제이쿼리를 사용한다 -- > &로 감싸준다
+        $(v_ckbox).prop("checked",false);
+        // 이정도는 기본
+
+
+    </script>
+</body>
+</html>

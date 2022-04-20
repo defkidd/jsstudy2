@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./jsp.js"></script>
+    <title>Document</title>
+
+</head>
+
+<body>
+    
+    <script>
+
+        function searchParam(key) {
+            return new URLSearchParams(location.search).get(key);
+        };
+        function searchParamDuplicate(key) {
+            if (new URLSearchParams(location.search).getAll(key).length == 0) {
+                return null
+            }
+            return new URLSearchParams(location.search).getAll(key);
+        };
+        var v_skills = searchParamDuplicate("nm_skills");
+        var v_content = searchParam("nm_content");
+        var v_gulid = searchParam("nm_gulid");
+
+        var v_tblName = "Gesi"; // 일단 테이블명(key값)은 Gesi로
+
+        console.log(localStorage.getItem(v_tblName));
+        // 이미써진 글이 있는지 없는지 확인필요
+        var v_gulDatas = JSON.parse(localStorage.getItem(v_tblName));
+        for (var i = 0; i < v_gulDatas.length; i++) {
+            if (v_gulDatas[i].pid == v_gulid) {
+                
+                v_gulDatas[i].v_title = "타이틀바꾸기";
+                v_gulDatas[i].v_content = v_content;
+                v_gulDatas[i].v_skills = v_skills;
+            }
+        }
+
+        localStorage.setItem(v_tblName, JSON.stringify(v_gulDatas)); // strigify = serialize
+
+        alert("잘 저장되었습니다.") // 잘저장되어있으면 리스트로 이동
+        // location.href="list.html"; // 서버에 다시 요청안하고 캐쉬던걸 사용할 수도 있음
+        opener.location.replace("list.html"); // 부모창 닫아주기 
+        // window.close(); // 자기자신 닫기
+
+    </script>
+</body>
+
+</html>

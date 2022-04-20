@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Over ES6를 꼭 준비해야 되는 시점
+        // caniuse.com 에서 항상 호환성을 확인하는 습관이 필요
+        // 변수 선언 let ,const
+        // let은 블락 scope 변수 그동안 전역/지역으로만 나뉘는것에 대한 불만 해소
+        // var 는 function 기준
+        const c_aaa = "defkid";
+        // c_aaa = "defkidd";
+        // const 원시타입(primitive Type)일 때는 안됨,
+        // 객체(Object) 속성은 바꿀수 있다.
+        const c_obj = {
+            "name":"def",
+            "hope":"kid"    
+        }
+        c_obj.hope="kido"
+        console.log(c_obj)
+        var f_checkLet = function () {
+            for (let i = 1; i <=10; i++) {
+                console.log(i)
+            }
+            alert("체크" + i)// var와의 차이점을 명확히 인식 할것 ! 
+        }
+        f_checkLet();
+    </script>
+</body>
+</html>

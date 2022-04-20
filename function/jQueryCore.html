@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="defkidd" id="id_disp">박경신짱1</div>
+    <div class="defkid">박경신짱2</div>
+    <div class="defkidd">박경신짱3</div>
+    <div class="defkid">박경신짱4</div>
+    <div class="defkidd">박경신짱5</div>
+    <input type="button" value="click" id="id_btn">
+    
+    <script>
+        // 실제 jQuery 만드는 로직은 생각외로 간단
+
+
+        // 즉각실행함수안에 functionClass를 넣어준다 . 즉각실행함수안의 변수는 지역변수가 
+        // 된다 . 즉각실행함수는 중요한 함수나 코드,를 넣는다.
+        !function () {
+            // proxy 방식
+            // function class 선언시 new를 없애기위해서.
+            // javascript에서 변수명으로 사용할수있는 특수문자 $ 와 _
+            var $ = function (p_sel) {
+                return new myDom(p_sel);
+            }
+
+            var myDom = function (p_sel) {
+                var v_elems = document.querySelectorAll(p_sel);
+                // 객체에 옮겨담기
+
+                this.length = v_elems.length;
+                this.selector = p_sel;
+                for (let i = 0; i < this.length; i++) {
+                    this[i] = v_elems[i];
+                }
+                return this;
+            }
+            window.$ = $; //  지역변수인 $를 전역변수로 만들어주는것(reference)
+            // core 밖에서 일반 개발자도 자신의 메소드를 추가할 수 있도록 myDom.prototype을 밖으로 
+            // 빼줄 필요가있음
+            $.fn = myDom.prototype
+        }();
+        $.fn.eq = function (p_index) {
+            this[0] = this[p_index];
+            for (let i = 1; i < this.length; i++) {
+                delete this[i];
+            }
+            this.length = 1;
+            return this; // 메소드체이닝을 위해서
+        }
+        $.fn.end = function () {
+            console.log(this.p_sel)
+            return $(this.selector)
+            
+        }
+        $.fn.html = function (p_arg) {
+            if (typeof (p_arg) == "undefined") {
+                // 선택된 것들 중 첫번째 것의 innerHTML을 리턴
+                // return 값이 this가 아니기 때문에 메소드 체이닝이 안됨
+                return this[0].innerHTML;
+            }
+            if (typeof (p_arg) == "string") {
+                // 선택된 것들 의 innerHTML에 값 세팅
+                for (let i = 0; i < this.length; i++) {
+                    this[i].innerHTML = p_arg;
+                }
+                return this; // 메소드체이닝
+            }
+            // 매개변수로 함수(콜백)가 넘어왔을 때
+            if (typeof (p_arg) == "function") {
+                for (let index = 0; index < this.length; index++) {
+                    this[index].innerHTML = p_arg.call(this[index], index, this[index].innerHTML)
+
+
+                }
+                return this; // 메소드체이닝
+            }
+
+
+        }
+        $.fn.attr = function (p_arg) {
+            console.log(typeof (p_arg))
+            if (arguments.length == 2) {
+                return $.fn.attrParams(this, arguments[0], arguments[1]);
+            }
+            if (typeof (p_arg) == "string") {
+                this[0].p_arg
+                var v_result = this[0].getAttribute(p_arg);
+                return v_result;
+            }
+            if (typeof (p_arg) == "object") {
+                //    console.log(JSON.stringify(p_arg))
+                //    console.log((p_arg))
+                let v_keys = Object.keys(p_arg);
+                //    let v_values =[]
+                //    console.log(v_keys)
+                for(let j = 0; j<this.length; j++){
+
+                    for (var i = 0; i < v_keys.length; i++) {
+    
+                        this[j].setAttribute(v_keys[i], p_arg[v_keys[i]])
+                    }
+                }
+                //    console.log(v_values)
+                return this;
+            }
+        }
+        $.fn.attrParams = function (p_this, p_arg1, p_arg2) {
+            if (typeof (p_arg2) == "string") {
+                for( let i =0 ; i<p_this.length; i++){
+
+                    p_this[i].setAttribute(p_arg1, p_arg2);
+                }
+                return p_this;
+            }
+            if (typeof (p_arg2) == "function") {
+                for (let index = 0; index < p_this.length; index++) {
+                   p_this[index].setAttribute(p_arg1, p_arg2.call(p_this[index], index, p_this[index].getAttribute(p_arg1)))
+
+                }
+                return p_this;
+            }
+        }
+        $.fn.empty = function () {
+            for (let i = 0; i < this.length; i++) {
+
+                this[i].innerHTML = ""
+            }
+            return this;
+        }
+        $.fn.on = function (p_evtName, p_cb) {
+            for (let i = 0; i < this.length; i++) {
+
+                this[i].addEventListener(p_evtName,p_cb);
+            }
+            return this
+        }
+
+        $("div").attr("name","ba")
+        $("div").attr({name:"xxx"})
+ 
+
+        
+        $("div").attr("class", function () {
+            // alert(p_index + " : " + p_val);
+            return "dfdfd"
+            // console.log(this)
+            // return this.innerHTML;
+        })
+        $("id_btn").on("click",function () {
+            console.log(this)
+        })
+        $(".defkid,.defkidd").html(function (p_index, p_oldHtml) {
+            // console.log(this)
+            // console.log(typeof(p_oldHtml))
+            // alert(p_index + " : "+ p_oldHtml)
+            // return p_oldHtml + "ㄹㅇ" ; /// 함수는 기본적으로 return이 있다 !! return생략하면 undefined 
+            return this.innerHTML + "ㄹㅇ"
+        });
+        // alert($(".defkid").html())
+        // $(".defkid").html("<h1>박경신짱</h1")
+        // console.log($("div").empty())
+        var v_test = $(".dfdfd").eq(1);
+        var v_test1 = $(".defkid").eq(1);
+        var v_test2 = $(".dfdfd").eq(1).end();
+        console.log(v_test)
+        console.log(v_test1)
+        console.log(v_test2)
+
+        // var v_test = new myDom(".defkid"); // new를 사용해서 생성
+
+    </script>
+</body>
+
+</html>

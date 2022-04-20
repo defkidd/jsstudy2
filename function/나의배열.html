@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // 나만의 배열을 만들어 보자
+        let MyArray = function () {
+            this.length = 0;
+            return this;
+        }
+        console.log(MyArray())
+        MyArray.prototype.push = function (p_val) {
+            // thos[0] = p_val;
+            this[this.length] = p_val;
+            this.length++;
+            return this; // 메소드체이닝을 위해서
+        }
+
+        MyArray.prototype.forEach = function (p_cb) {
+            for (var i = 0; i < this.length; i++) {
+                p_cb(this[i], i)
+
+            }
+            return this; // 메소드 체이닝을 위해 thi는 MyArray 타입객체
+        }
+        MyArray.prototype.sort = function () {
+            for (var i = 0; i < this.length; i++) { // 버블정렬
+                for (var j = i + 1; j < this.length; j++) {
+                    if (this[i] < this[j]) {
+                        var temp = this[i];
+                        this[i] = this[j];
+                        this[j] = temp
+                    }
+                }
+            }
+            return this; // 중요한 의미가 있다.
+
+        }
+        MyArray.prototype.sort1 = function (p_cb) {
+            alert(typeof (p_cb))
+            // if (typeof (p_cb) == "undefined") {
+            if (String(p_cb) == "undefined") {
+                alert("ㅇㅇ")
+                for (var i = 0; i < this.length; i++) { // 버블정렬
+                    for (var j = i + 1; j < this.length; j++) {
+                        if (this[i] > this[j]) {
+                            var temp = this[i];
+                            this[i] = this[j];
+                            this[j] = temp
+                        }
+                    }
+                }
+                return this;
+            }
+
+            for (var i = 0; i < this.length; i++) { // 버블정렬
+                for (var j = i + 1; j < this.length; j++) {
+                    if (p_cb(this[i], this[j]) > 0) {
+                        var temp = this[i];
+                        this[i] = this[j];
+                        this[j] = temp
+                    }
+                }
+            }
+            return this; // 중요한 의미가 있다.
+
+        }
+
+        let v_arr = new MyArray();
+        for (var i = 1; i <= 7; i++) {
+            v_arr.push(Math.ceil(Math.random() * 10));
+        }
+        console.log(v_arr)
+        console.log(v_arr.child)
+        console.log(v_arr.sort1())
+        console.log(v_arr[0])
+
+        console.log(v_arr.sort())
+        console.log(v_arr.push(13).push(15).push(20)) // 메소드 체이닝.!
+        console.log(v_arr.sort().sort()) // forEach가 return값이 this 즉 배열이기때문에 가능하다
+
+        console.log(v_arr.sort1(function (a, b) {
+            return a - b;
+        }))
+        // v_arr.push("defkidd");
+        // v_arr.push("defkidd");
+        // v_arr.push("defkidd");
+        // v_arr.push("defkidd");
+        // console.log(v_arr)
+
+        // v_arr.forEach((p_val,p_index)=> {
+        //     alert(p_index + " +" + p_val)
+        // })
+        // console.log(v_arr)
+
+    </script>
+
+</body>
+
+</html>

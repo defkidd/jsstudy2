@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    var v_str = "블랙핑크 로제짱";
+    
+    console.log(typeof(v_str)); //데이터타입 확인
+    //string은 원시타입(Primitive Type)이라고 해쓴ㄴ데 메소드가?
+    // wrapper class 공부
+    //자바스크립트에선 원시타입에 .을 붙이면 자동으로 Wrapper 클래스로 바뀜(객체로 바뀜)
+    console.log(v_str.replace("짱","왕짱")); 
+    // 문자열의 메소드는 새로운 문자열을 만들어서 리턴
+
+    v_str = v_str.replace("짱","왕짱");
+    // 새로운 값으로 원 변수값에 넣어줘어야 바뀜
+    console.log(v_str);
+</script>

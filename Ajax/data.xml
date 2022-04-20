@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<friends>
+    <friend>
+        <name>박경신</name>
+        <age>20</age>
+        <chac>ota</chac>
+    </friend>
+    <friend>
+        <name>박경신1</name>
+        <age>201</age>
+        <chac>ota</chac>
+    </friend>
+    <friend>
+        <name>박경신2</name>
+        <age>201</age>
+        <chac>ota</chac>
+    </friend>
+    
+</friends>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //로또로 리팩토링 이해하기 . 리팩토링은 습관이 중요
+        // 모아서하지말고 , 틈틈히 ,나중에 큰재산이됨
+
+        // 랜덤숫자를 발생시킨다면 몇번만에 6개의 다른 숫자를 발생시킬지
+        // 무한루프를 만들때는 항상 빠져 나올 조건을 생각한다
+
+        // 배열과, 숫자를 넘겨받아서 해당 숫자가 배열에 있는지 확인 하는 함수
+        // 리팩토링 : 코드 짜고 정리하는 시간을 가져라.
+        // Js파일로 옮겨주는게 중요하다
+        let repeatCheck = function (p_arr,p_num) {
+            for(let i = 0; i<p_arr.length; i++ ){
+                if (p_arr[i] == p_num) {
+                    return true; // 중복찾음
+                }
+            }
+            return false; // 중복없음
+        }
+        var v_lotto = []; // 번호 6개를 담을 빈 배열
+        var cnt = 0;
+        while (true) {
+            cnt++;
+            var v_ranNum = Math.ceil(Math.random()*45); // 1~45
+            if (!repeatCheck(v_lotto,v_ranNum)) {
+                v_lotto.push(v_ranNum);
+            }
+            // 중복 체크 -- > 개념적으로 중요한 부분
+            // var v_isIn = false; // 없다고 가정, 초보자는 이런변수를 어려워함 연습할것
+            // for(var i = 0; i<v_lotto.length; i++){
+            //     if (v_lotto[i] == v_ranNum)  {
+            //         // alert("중복발생");
+            //         // 같은게 있다는 표시를 한다
+            //         v_isIn= true; // 가정이 틀려서 true로 바꿔줌.
+            //         break;
+            //     }
+            // }
+
+            // alert(cnt)
+            // // 가설의 증명 확인
+            // if(!v_isIn){
+            //     v_lotto.push(v_ranNum);
+            // }
+            if (v_lotto.length == 6) {
+                alert("끝"+v_lotto)
+                break;
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

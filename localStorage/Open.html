@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id= "id_btn" type="button" value="누르기">
+    <script>
+        var v_btn = document.querySelector("#id_btn");
+        var f_click = function () {
+            // 새창열기
+            // modal 창을 div로 만들어서도 많ㅇ이 사용 왜냐하면 사용자가 pop-up창을 막는경우가 있어서.
+            window.open("list.html","def","width=400,height=600,left=150,top=150");
+            
+        }
+        v_btn.onclick = f_click;
+
+
+    </script>
+</body>
+</html>

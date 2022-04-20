@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    검색<input type="text" name="" id="id_sch" value="">
+    <div id="id_div">
+
+
+    </div>
+    <script>
+        //함수를 미리 만들어줌
+        // 이렇게 데이터를 넘겨받는것을 JSONP(JSON PADDING)
+
+        // var img = "";
+        var v_pre = "https://www.flickr.com/services/feeds/photos_public.gne?tags=";
+        var v_post = "&format=json";
+        var v_sch = document.querySelector("#id_sch");
+        var f_addFlickr = function () {
+
+            var v_script = document.querySelector("#id_fl");
+            if (v_script) {
+                document.body.removeChild(v_script);
+            }
+            document.querySelector("#id_div").innerHTML = "";
+            
+            var v_scriptSrc = v_pre + v_sch.value + v_post;
+            v_script = document.createElement("script");
+
+            v_script.src = v_scriptSrc;
+            v_script.id = "id_fl";
+
+
+            document.body.appendChild(v_script);
+            // document.body.removeChild(v_script);
+
+
+        }
+        v_sch.addEventListener("keydown", function () {
+            if (event.keyCode == 13) { // 엔터키코드
+
+                f_addFlickr();
+            }
+        })
+        var jsonFlickrFeed = function (p_json) {
+            // console.log(p_json)
+            // console.log(p_json.items[0].media.m)
+            // console.log(p_json.items.length)
+            for (var i = 0; i < p_json.items.length; i++) {
+
+                // img += `<img src="${p_json.items[i].media.m}" alt="" id="id_img">`;
+                // 이미지 태그설정
+                var v_img = document.createElement("img");
+                // src에 경로할당
+                v_img.src = p_json.items[i].media.m;
+                document.querySelector("#id_div").appendChild(v_img)
+            }
+            // p_json.items[0].link;
+            // document.querySelector("#id_div").innerHTML=img;
+        }
+
+
+    </script>
+
+    <script id="id_fl" src="https://www.flickr.com/services/feeds/photos_public.gne?tags=dog&format=json"></script>
+
+</body>
+
+</html>

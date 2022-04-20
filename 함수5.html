@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 일반적으로는 잘 쓰지 않지만 , 라이브러리 만드는 경우에
+// 한번은 꼭 쓰는 즉각 실행 함수
+// 익명함수에 ()로 둘러싸면 표현식으로 해석되어 선언 에러가 없어짐
+// 코드가 단 한번만 실행이 필요한 경우 ,굳이 함수로 만들필요가 없음
+// 메모리절약 , 그리고 중요 핵심 코드를 블락지을 때도 사용
+// 
+(function (p_arg) {
+    console.log(p_arg+"ㅇㅇㅇㅇㅇㅇㄴ")
+}) 
+("매개변수");
+
++function (p_arg) {
+    console.log(p_arg+"ㅇㅇㅇㅇㅇㅇㄴ")
+} 
+("매개변수");
+
+-function (p_arg) {
+    console.log(p_arg+"ㅇㅇㅇㅇㅇㅇㄴ")
+} 
+("매개변수");
+
+!function (p_arg) {
+    console.log(p_arg+"ㅇㅇㅇㅇㅇㅇㄴ")
+}
+
+("매개변수");
+var x = 35;
+
+
+
+("매개변수2");
+</script>

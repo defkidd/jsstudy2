@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <title>Document</title>
+<style>
+    #id_disp { 
+        width: 200px;
+        height: 200px;
+        border: 10px solid green;
+        outline:0;
+    }
+</style>
+</head>
+<body>
+    순서1<input type="text" name="" id="id_txt" value="" tabindex="2"><br>
+    순서2<input type="text1" name="" id="id_txt1" value="" tabindex="1"><br>
+    순서3<input type="text2" name="" id="id_txt2" value="" tabindex="5"><br>
+    순서4<input type="text" name="" id="id_txt" value="" tabindex="4"><br>
+    순서5<input type="text1" name="" id="id_txt1" value="" tabindex="-1"><br>
+    순서6<input type="text2" name="" id="id_txt2" value="" tabindex="6"><br>
+    <!-- focus 못 받는 앨리먼트 에 focus 를 주고 싶을때 -->
+
+    <!-- contenteditable 속성은 div태그안에도 text를 쓸수있게해준다 -->
+    <div id="id_disp" tabindex="0" contenteditable>키보드 클릭</div>
+    <a href="#" onclick="f_click()">눌러</a>
+    <input type="button" value="눌러" id="id_btn">
+    <script>
+        // DomContentLoaded 이벤트 발생시 샐항
+        function f_click() {
+            alert("ddd")
+        }
+        // 전역 함수 ,전역변수 중요.
+        $(function () {
+           // 초기화 블럭
+           document.querySelector("#id_btn").addEventListener("click",f_click)
+        })
+
+        // 태그해석이 끝나면 발생
+        window.addEventListener("DOMContentLoaded", function () {
+            // alert("아아아dd")
+        })
+        // 태그해석과 이미지로딩이 끝나면 발생
+        window.addEventListener("load", function () {
+            // alert("아아아")
+        })
+        
+        // tabindex -1은 포커스 안주기, 1번부터는 순서 0은 포커스 못받는태그 받게함
+        // document.querySelector("#id_txt2").focus(); // 커서주기
+        // var v_txt = document.querySelector("#id_txt");
+        // var v_disp = document.querySelector("#id_disp");
+        // var f_down = function () {
+        //     // alert(event.keyCode);
+        // }
+        // v_txt.addEventListener("keydown",f_down)
+
+        // // div는 기본적으로 focus를 받을수가없다.
+        // v_disp.addEventListener("keydown",f_down);
+
+    </script>
+</body>
+</html>

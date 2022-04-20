@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+    // 실제롤 script에서 this는 다루기 어려움
+    var f_check = function () {
+        // console.log("매개 변수 : ",p_arg1,p_arg2) // 함수를 전역변수로 선언하면 window 변수의 속성을 추가하는것과 같다
+        console.log(this) // ? 
+
+    }
+    var dd = 1
+    var v_obj = {name: "오세현 먹어도 안 쪄요"};
+    v_obj.myfunc = f_check; //
+    v_obj.myfunc.call({name:"박경신",age:100})
+    // v_obj.myfunc.call(document,"매개변수","변수")
+    // v_obj.myfunc.apply(document,["매개변수","변수"])
+    v_obj.myfunc()
+    f_check();// 윈도우 객체의 매서드
+
+</script>

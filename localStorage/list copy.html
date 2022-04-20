@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Document</title>
+<script src="./jsp.js"></script>
+<style>
+    .current {
+        color : red; /* 글자색 red */
+    }
+
+</style>
+</head>
+<body>
+    <input type="button" value="클릭" id="id_btn">
+    <h1>꼉시니>3&lt 게시판 리스트</h1>
+    <div id="id_disp"></div> <!-- 출력용-->
+    <a href="./write.html">글쓰기</a>
+
+    <script>
+        var v_btn = document.querySelector("#id_btn");
+        var f_serialize = function (p_form) {
+            var v_elements = p_form.elements;
+            var v_returnStr = "";
+            for(var i = 0 ; i<v_elements.length; i++){
+                v_returnStr += v_elements[i].name;
+                v_returnStr += "=";
+                v_returnStr += v_elements[i].value
+                v_returnStr += "&";
+            }
+            return v_returnStr;
+        }
+        var f_click = function () {
+            child.document.forms[0].nm_name.value="이름";
+            child.document.forms[0].nm_age.value="222";
+            var v_elements = child.document.forms[0].elements;
+            alert(f_serialize(child.document.forms[0]))
+            for(var i = 0; i<v_elements.length; i++){
+                console.log(v_elements[i].name);
+                console.log(v_elements[i].value)
+            }
+        }
+        v_btn.addEventListener("click",f_click)
+        var v_tblName ="Gesi";
+        var v_guls =JSON.parse(localStorage.getItem(v_tblName)); // 배열
+        // 페이징 처리 
+        var v_gulSuperPage = 10; // 페이지당 그 ㄹ수 
+        var v_curPage = 1; // 현재 페이지 넘버 ,일단 1페이지
+            if (request.getParameter("page") != null) {
+                v_curPage =  request.getParameter("page")
+            } 
+        var v_totalPage =Math.ceil(v_guls.length / v_gulSuperPage) ; // 소수점이 떨어짐.
+        var v_startGulNum = (v_curPage-1) * v_gulSuperPage;
+        var v_endGulNum = v_startGulNum+(v_gulSuperPage-1);
+        if (v_endGulNum>v_guls.length) {
+            v_endGulNum =v_guls.length-1
+        }
+        var v_tblStr = "<table border=1>";
+            v_tblStr += "<tr><th>순번</th><th>제목</th><th>글쓴이</th><th>기술</th><th>삭제</th></tr>"
+            
+        for (let index = v_startGulNum; index <=v_endGulNum; index++) {
+            v_tblStr +="<tr>";
+            // v_tblStr +="<td>"+(index+1) + "</td>";
+            v_tblStr +="<td>"+ v_guls[index].pid+ "</td>";
+            v_tblStr +="<td><a href ='http://naver.com' onclick='f_open(" +v_guls[index].pid+")'>"+ v_guls[index].v_title + "</a></td>";
+            v_tblStr +="<td>"+ v_guls[index].v_writer + "</td>";
+            v_tblStr +="<td>"+ v_guls[index].v_skills + "</td>";
+            v_tblStr +="<td><input type=checkbox name='nm_del' value ='"+v_guls[index].pid+"'></td>";
+            v_tblStr +="</tr>";
+            
+        }
+        v_tblStr += "</table><br>";
+        
+        for(var i = 1 ; i <= v_totalPage ;i++){
+            if (i == v_curPage) {
+                
+                v_tblStr += "<a class ='current' href =list.html?page=" +i+">"+ i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+            } else {
+                v_tblStr += "<a href =list.html?page=" +i+">"+ i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+            }
+        }
+        v_tblStr += "<br><input type='button' id='id_del' value='선택한것삭제'>"
+        document.querySelector("#id_disp").innerHTML = v_tblStr;
+        var v_del = document.querySelectorAll("input[name=nm_del]")
+        var v_delBtn = document.querySelector("#id_del")
+        var v_delArray = []
+        for ( var i = 0 ;i<v_del.length; i++){
+            v_del[i].addEventListener("click",function (event) {
+                console.log(event.target.checked)
+                if(event.target.checked){
+                    
+                }
+                
+            })
+            
+        }
+        
+        // console.log(v_guls)
+        v_delBtn.addEventListener("click", function () {
+            console.log(v_delArray)
+            // for (var i =0; i<v_del.length; i ++){
+            //     for(var j = 0; j<v_delArray.length; j++){
+            //         if (v_del[i].value == v_delArray[j]){
+
+            //             // console.log(v_del[i].value)
+            //             for (var k =0; k<v_guls.length; k++){
+            //                 if (v_guls[k].pid ==v_del[i].value) {
+            //                     console.log(v_guls[k].pid)
+            //                     v_guls.splice(k,1)    
+                                
+            //                 }
+            //             }
+            //             // console.log(v_guls)
+            //             // localStorage.setItem("Gesi",JSON.stringify(v_guls))
+            //             // location.href="list.html"
+                        
+            //         }
+                    
+            //     }
+                
+            // }
+            
+        })
+        
+        var child;// 열린창 제어를 위한 변수
+        var f_open = function (p_pid) {
+            event.preventDefault(); // 기본 장착된 기능막기
+            // event.stopPropagation(); // 이벤트전파 막기
+            
+            // alert("함수 f_open"+p_pid)
+            child=window.open("detail.html?gulid="+p_pid+"","detail","width=800,height=500,left=100,top=100")
+        }
+
+    </script>
+</body>
+</html>

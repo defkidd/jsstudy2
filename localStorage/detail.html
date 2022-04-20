@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 검색엔진에 걸리는 언어.. 이페이지가 어떤언어를 담고있는지 알려준다.-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jsp.js"></script>
+</head>
+
+<body>
+    <h1>꼉시니 게시판</h1>
+    <form>
+        이름 : <input type="text" name="nm_name" id="id_name"><br>
+        나이 : <input type="text" name="nm_age" id="id_age">
+
+    </form>
+    <hr>
+    <form>
+        가수 : <input type="text" name="nm_singer" id="id_singer"><br>
+        노래 : <input type="text" name="nm_song" id="id_song">
+    </form>
+    <form action="update_action.html">
+        <!-- 사용자에게 보여 줄 필요는 없지만 프로그램적으로 필요한값이 있을 경우 hidden 을 이용 -->
+        <input type="hidden" name="nm_gulid" value="" id="id_gulid">
+        제목 : <input type="text" name="nm_title" id="" value="" readonly><br>
+        글쓴이 : <input type="text" name="nm_writer" id="" value="" readonly><br>
+        글쓴이 스킬 :<br>
+        JS<input type="checkbox" name="nm_skills" id="id_js" value="js">
+        스프링<input type="checkbox" name="nm_skills" id="id_spring" value="spring">
+        파이썬<input type="checkbox" name="nm_skills" id="id_python" value="python">
+        오라클<input type="checkbox" name="nm_skills" id="id_oralce" value="oracle"><br>
+        <hr>
+        내용 : <br>
+        <textarea cols="40" rows="5" name="nm_content"></textarea><br>
+        <input type="submit" value="수정">
+    </form>
+    <script>
+        var cnt = 0;
+        var v_hidden = document.querySelector("#id_gulid");
+        var v_title = document.querySelector("input[name=nm_title]");
+        var v_writer = document.querySelector("input[name=nm_writer]");
+        var v_content = document.querySelector("textarea");
+        var v_skills = document.querySelectorAll("input[name=nm_skills]");
+        var v_tblName = "Gesi";
+        var v_pid = request.getParameter("gulid");
+        var v_datas = JSON.parse(localStorage.getItem(v_tblName));
+        v_hidden.value = v_pid; // 끌어온 글의 id 값을 hidden 에 세팅
+        // console.log(v_skills[0].value)
+        //     window.onload = function () {
+        //     for( var i =0 ; i<v_skills.length; i++){
+        //         console.log(v_skills[i].checked)
+        //         if (v_skills[i].checked) {
+        //             cnt++;
+        //         }
+        //     }
+        //     console.log(cnt)
+        // }
+        var skillsDetail = ""
+        // pid 값이 같은 걸 검색해서 찾아내야 하니까
+
+
+        for (var i = 0; i < v_datas.length; i++) {
+            if (v_datas[i].pid == v_pid) {
+                v_title.value = v_datas[i].v_title;
+                v_writer.value = v_datas[i].v_writer;
+                v_content.textContent = v_datas[i].v_content;
+                var v_skillsArray = v_datas[i].v_skills;
+                // alert(v_skillsArray.length)
+
+                for (var j = 0; j < v_skillsArray.length; j++) {
+                    // alert("dd")
+                    // alert( v_datas[i].v_skills[i])
+                    skillsDetail = v_skillsArray[j];
+                    for (var k = 0; k < v_skills.length; k++) {
+                        //   console.log(skillsDetail)
+                        if (v_skills[k].value == skillsDetail) {
+                            v_skills[k].checked = true;
+                            if (v_skills[k].checked == true) {
+                                cnt++;
+                            }
+                        }
+                    }
+                    //   alert(skillsDetail)
+                    //   for(var j = 0 ; j < v_skills.length; i++){
+                    //       console.log(v_skills[0])
+
+                    //   }
+                    //   if(document.querySelector("input").value=skillsDetail){
+                    // document.querySelector("input").checked = true
+
+                    //   }
+
+                    //   console.log(document.querySelector("input[value="+skillsDetail+""))
+                }
+            }
+        }
+
+        //    console.log(skillsDetail)
+        //    for(i = 0 ; i<v_skills.length; i++){
+        //        console.log(v_skills[i].value)
+        //        if (v_skills[i].value) {
+
+        //        }
+        //    }
+
+        // 문서의 마지막에써주기 
+        console.log(v_skills)
+        for (var i = 0; i <v_skills.length; i++) {
+
+            console.log(v_skills[i])
+            v_skills[i].addEventListener("click", function () {
+                console.log(event.target)
+               if (event.target.checked==true) {
+                   cnt++;
+                   if (cnt>3) {
+                       alert("3개 ㄴ")
+                       event.target.checked =false
+                       cnt--;
+                       console.log(cnt)
+                    }
+                } else {
+                    cnt--;
+                    console.log(cnt)
+               }
+
+            })
+        }
+
+    </script>
+
+</body>
+
+</html>

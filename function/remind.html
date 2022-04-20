@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="id_btn" value="bind">
+    <script>
+    var v_btn = document.querySelector("#id_btn");
+    
+    v_btn.setAttribute("type","radio");
+    v_btn.type = "radio";
+    
+    v_btn.getAttribute("type");
+    v_btn.type
+
+    localStorage.setItem("aaa","bbb");
+    localStorage.aaa="bbb";
+
+    
+    var f_this = function (p_arg1,p_arg2) {
+        alert(p_arg1 +"::"+p_arg2)
+        console.log(this)
+    }
+    // 함수 실행기호 ()를 붙일 수 없을 때 bind를 기억한다.
+    // v_btn.addEventListener("click",f_this.bind({name:"vengeance"},"def","kid"))
+    // v_btn.addEventListener("click",f_this.bind("vengeance","def","kid"))
+    v_btn.addEventListener("click",f_this.bind(this,"def","kid"))
+        
+    
+    
+    
+    
+    
+    // // call , apply , bind
+
+
+    // var f_this = function (p_arg1,p_arg2) {
+    //     alert(p_arg1,p_arg2)
+    //     console.log(this)
+    // }
+    // // function도 객체다
+    // f_this("p_arg1","p_arg2");
+    // // this 값을 바꿀때 call을 쓴다, 원함수가 매개변수가 있을때 call이후의 첫번쨰 매개변수는 this 를 세팅한다
+    // f_this.call(document,"p_arg1","p_arg2");
+    // // call 과 apply는 본질적으로 같다. this세팅 매개변수 뒤에, 진짜파라미터는 배열형식으로 넘겨줘야한다
+    // f_this.apply(document,["p_arg1","p_arg2"])
+    // f_this.apply({
+    //     name1:"gggg", 
+    //     alias: "ddfdfd"},["dd","dfdf"])
+
+    </script>
+</body>
+</html>

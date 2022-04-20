@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    #point {
+        width: 10px; height: 10px;
+        background-color: orange;
+        position: absolute;
+        left: 140px ; top: 200px;
+    }
+    #myHeart {
+        border: 5px solid pink;
+        position: relative; /*static relative absolute fixed*/
+        /* 부모 relative 자식 absolute 상황 기억
+        이런경우 자식은 부모 왼쪽 모서리 기준으로 움직인다
+        */
+        left : 100px ; top:100px;
+        width: 100px; height: 100px;
+        overflow: hidden; /*내영역을 벗어난 자식 숨기기*/
+        transform-origin: right center; /* 회전의 중심을 설정*/
+        transform: rotate(45deg);
+    }
+    .right {
+        position: absolute;
+        left: 50px; 
+        width: 100px; height: 100px;
+        background-color: red;
+        border-radius: 50%; /* 원모양으로 만들기*/
+    }
+    .bottom {
+        position: absolute;
+        top: 50px; 
+        width: 100px; height: 100px;
+        background-color: red;
+        border-radius: 50%; /* 원모양으로 만들기*/
+    }
+</style>
+</head>
+<body>
+    <input type="button" value="복사" id="id_copy">
+    <input type="button" value="이동" id="id_move">
+    <div id="id_disp" style="border: 1px solid blue">
+
+
+        def
+
+    </div>
+    <div id="myHeart">
+        <div class="right"></div>
+        <div class="bottom"></div>
+    </div>
+    <div id="point"></div>
+<script>
+    // var global = []
+    // global.v_move = document.querySelector("#id_move")
+    var v_move = document.querySelector("#id_move");
+    var v_copy = document.querySelector("#id_copy");
+    var v_disp = document.querySelector("#id_disp");
+    var v_heart = document.querySelector("#myHeart");
+
+    var v_gak = 0;
+    var f_rotate = function () {
+        v_gak = (v_gak + 10) % 360;
+        v_heart.style.transform = "rotate(" +v_gak + "deg)";
+        setTimeout(f_rotate,500) // 0.5초마다 재귀호출
+    }
+    f_rotate(); // 함수 콜
+    var f_copy = function () {
+        var v_clone = v_heart.cloneNode(!0); // Node 복사 cloneNode(true) (true == !0) 를 써주면 깊은복사  얕은복사
+        v_clone.style.display = "inline-block"
+        v_clone.style.position = "static"
+        v_clone.style["position"] = "static"
+        v_disp.appendChild(v_clone);  
+    }
+    
+    v_copy.addEventListener("click",f_copy)
+    var f_move  = function () {
+        // 이미 화면상에 존재하는 객체를 다른곳에 붙여놓으면 이동하는것처럼 보임
+        v_disp.appendChild(v_heart);// javascript 에선 append 보다 appendchild를 더많이쓴다
+        
+   
+    }
+    v_move.addEventListener("click", f_move);
+    // for ( var i = 1; i <=30; i++){
+    //     document.write("<h1>날씨가 좋다<h1>");
+    // }
+    var v_heart = document.querySelector("#myHeart");
+    // v_heart.style.left = "300px";
+
+</script>
+</body>
+</html>

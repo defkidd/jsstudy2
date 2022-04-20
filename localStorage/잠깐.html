@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="id_disp"></div>
+    <script>
+        var v_disp = document.querySelector("#id_disp")
+        // 0*2 < Math.random()*2 < 1 *2
+        
+
+        // 반약 50~100사이의 값을 발생시킨다면
+        function f_ranNum(p_start,p_end) {
+            return  Math.floor(Math.random()*(p_end-p_start+1)) + p_start;
+        }
+        // for(var i = 1 ; i<=10 ; i++){
+        //     alert(f_ranNum(10,100));
+        // } 
+
+        for(var i = 1 ; i<=10; i++){
+            v_disp.innerHTML = v_disp.innerHTML + f_ranNum(10,100)+"<br>";
+            // v_disp.appendChild() = f_ranNum(10,100)+"<br>";
+        }
+        
+        
+        var v_arr =["경신1","경신2","경신3"];
+        v_arr.splice(1,1);
+        alert(v_arr)
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #id_clock {
+            color: yellow;
+            font-size: 3em;
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="id_clock">디지털 시계를 만들자.
+
+    </div>
+    <script>
+        let v_clock = document.querySelector("#id_clock");
+
+
+        let f_clock = function () {
+            let v_today = new Date();
+            // 클라이언트에서 그냥 Date 객체를 생성해서 사용하는건 의미가없다. 공통된 시간이아님
+            //서버시간을 읽어와서 강제 세팅하기위해서는 new Date("YY-MM-DD") 형식으로 적어준다.
+            // 알아둬야 하는거
+            // v_today.setDate(31);
+            // v_today.setDate(v_today.getDate() + 5)
+            // alert(v_today.getMonth())// -1된값이나온다
+            // alert(v_today.toLocaleString())
+
+            let ampm;
+            let v_hour;
+            ampm = "PM";
+            v_hour = v_today.getHours() - 12
+            if (v_hour<10) {
+                v_hour = "0"+v_hour;
+            }
+            if( v_today.getMinutes()<10){
+                
+            }
+            console.log(typeof(v_hour))
+            v_clock.innerHTML = ampm + (v_hour) + ":" + v_today.getMinutes() + ":" + v_today.getSeconds();
+            setTimeout(f_clock, 1000)
+        }
+        f_clock();
+    </script>
+</body>
+
+</html>

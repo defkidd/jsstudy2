@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        alert(location.href)
+        
+        function searchParam(key) {
+            return new URLSearchParams(location.search).getAll(key);
+        };
+        // var v_title =  location.href.split("?")[1].split("&").split("=")[0];
+        // decodeURIComponent(v_title); // 디코딩하기
+        // encoding decoding 세트
+        // escape unescape  예전 세트
+        // encodeURI decodeURI 조금 예전 세트
+        // encodeURIComponent decodeURIComponent  요즘사용세트
+        // 개발자라면 상황이 정리가 안 된듯 보인다면 일반화(추상화)를 시도해 봅니다.
+        var request = {};
+
+        request.getParameter= function(p_name){
+            if (location.href.indexOf("?") == -1) {
+                return null;
+            }
+            var v_quueryString = location.href.split("?")[1];
+            var v_params = v_quueryString.split("&");
+            for(var i=0; i<v_params.length; i++){
+                var v_name = v_params[i].split("=")[0];
+                var v_value = v_params[i].split("=")[1];
+                if (v_name == p_name) {
+                    return decodeURIComponent(v_value.replaceAll("+"," "));
+                }
+
+            }
+            // return  함수는 return 값이 생략돼있다. 값이 없으면 undefined 로 뜬다
+            return null;
+        }
+        console.log(request.getParameter("nm_content"));
+        // console.log(searchParam("nm_skills"));
+        var v_title =  searchParam("nm_title");
+        var v_writer =  searchParam("nm_wirter");
+        var v_skills = searchParam("nm_skills");
+        var v_content =  searchParam("nm_content");
+
+
+        console.log(v_title[0])
+        console.log(v_writer[0])
+        console.log(v_skills[1])
+        console.log(v_content)
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <input type="button" value="눌러" id="id_btn">
+</body>
+<script>
+    // 일반적인 형태의 추상화.
+    // var myPrint = function (p_msg) {
+    //     document.write(p_msg+"<br>");
+    // }
+    // 참조(Reference)를 이해하는 사람이 생각할수 있는 방법
+    // 발전된 형식
+    var myPrint = document.write.bind(document); // write 메소드의 함수포인터..!
+    // myPrint.call(document,"<h1>박경신짱</h1>");
+    myPrint("<h1>박경신짱</h1>");
+    // bind 
+    var v_btn = document.querySelector("#id_btn");
+    var f_click= function (p_arg) {
+        console.log(this);
+        alert("눌림?"+p_arg);
+    }
+    //첫번째 매개변수는 this에 세팅 call은 함수를 실행시키지만 bind는 뒤에서 함수를 만들어
+    // 함수포인터를 리턴해줌
+    v_btn.addEventListener("click",f_click.bind(document,"만세"))
+    
+</script>

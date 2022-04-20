@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 기본은 꼭 반복연습해서 손에 익을 때 까지
+    // 나 대신 통신 해줄 객체 생성(ajax)
+    var v_ajax = new XMLHttpRequest();
+    // 통신객체에 시킬일 지정 RESTfulApi
+    // v_ajax.open("메소드","URL","비동기여부")
+    v_ajax.open("get","../시작.html",true);
+    
+    // 통신객체에게 이벤트(상황변화)가 생길때 할일을 지정
+    v_ajax.onreadystatechange = function () {
+        // 준비단계는 관심없고, 결과받았을 떄만 관심
+        if(v_ajax.readyState == 4 && v_ajax.status == 200 ){
+            // if (v_ajax.status == 200) {
+                // alert("통신이 잘 끝났다")
+                alert(v_ajax.responseText)
+            // }
+        }
+    }
+
+    // 통신객체 일 시키기
+    v_ajax.send();
+    alert("언제 뜸?")
+
+
+</script>    
+</body>
+</html>

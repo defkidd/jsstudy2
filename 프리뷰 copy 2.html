@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #id_disp {
+            width: 200px;
+            height: 200px;
+            border: 3px solid pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="id_disp"></div>
+    <input type="file" multiple name="nm_file" id="id_file" accept=".jpg,.png">
+    <!-- multiple 은 파일여러개 선택하는 속성 accept -> 확장자 제한하는 속성-->
+    <script>
+        var v_disp = document.querySelector("#id_disp");
+        var v_fileBtn = document.querySelector("#id_file");
+        
+        function readFile(file) {
+            return new Promise((resolve,reject)=> {
+                let v_fileReader = new FileReader();
+
+                resolve("dsafds") 
+                v_fileReader.onload =() => {
+                    var v_img = document.createElement("img");
+                    // console.log(v_fileReader.result)
+                    v_img.src = v_fileReader.result;
+                    v_img.width = 200;
+                    v_img.setAttribute("height", 200);
+                    // document.body.removeChild(v_img)
+                    // v_disp.innerHTML = "";
+                    v_disp.appendChild(v_img);
+
+                }
+                v_fileReader.readAsDataURL(file);
+            })
+        }
+        
+        async function f_chagne () {
+            v_disp.innerHTML = "";
+            var v_file = v_fileBtn.files; // 파일리스트 안 파일 객체 뽑기
+            console.log(v_file.length)
+            for (let i = 0; i < v_file.length; i++) {
+                // console.log(v_file[i])
+                let xx= await readFile(v_file[i])
+                console.log(xx)
+
+            }
+        }
+
+        v_fileBtn.addEventListener("change", f_chagne)
+
+    </script>
+</body>
+
+</html>

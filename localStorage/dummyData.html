@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 더미데이터 입력(페이지 나누기용)
+        var v_tblName = "Gesi";
+        var v_datas = [];// 글 객체를 담을 빈 배열
+
+        for(var i = 1 ; i<=108; i++){
+            var v_gul = {};
+            v_gul.pid = i;
+            v_gul.v_title = "제목 " + i;
+            v_gul.v_writer = "작가" + i;
+            v_gul.v_content = "내용 " + i ;
+            var v_skills = ["js","python","oracle","spring"];
+            var v_count = Math.floor(Math.random()*2)+1; // 1 또는 2 
+            for (var j=0; j<v_count; j++){
+                v_skills.splice(Math.floor(Math.random()*v_skills.length),1);
+
+            }
+            v_gul.v_skills = v_skills;
+
+            v_datas.push(v_gul)
+        }
+    localStorage.setItem(v_tblName,JSON.stringify(v_datas))
+
+    </script>
+</body>
+</html>

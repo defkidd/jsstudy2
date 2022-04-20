@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>    
+    // 스크립트의 특별한 반복문 for in , 객체에서 속성값 뽑아 낼떄
+    var v_obj = {
+        name1:"네임1",
+        name2:"네임2",
+        name3:"네임3",
+        name4:"네임4"
+    }
+    // for (var v_key in v_obj){
+    //     alert("key : " + v_key + " value : " + v_obj[v_key])
+    // }
+
+    // 잘 알아두면 가끔 아주 유용함
+    for(var v_key in document){
+        document.write(v_key + " : " + document[v_key]+"<br>")
+    }
+
+    //반복문 for, while
+
+    var i=1;
+    var sum =0;
+    // while ("이것은 참") {
+    //     // 빠져나가는 조건을 생각해야한다.
+    //     sum += i;
+    //     if (i==10) {
+    //         alert(sum)
+    //         break;
+    //     }
+    //     i++;
+    // }
+    //while문을 for문으로 고치기 역도가능.
+    // for(;"이것도참";){//무한반복 , 문자열은 공백만빼고 모두참.
+    //     if (i==9) continue; // 보통 특정 조건에서 SKIP할 때 사용
+    //     sum += i;
+    //     if (i==10) {
+    //         alert(sum)
+    //         break;
+    //     }
+    //     i++;
+    // }
+</script>

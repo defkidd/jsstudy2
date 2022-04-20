@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //js 변수 Scope(범위,Life Cycle)
+        //es5 버전과 es6qjwjs(2015년12월)
+        // var     let const
+        // var는 전역과 지역(function) scope만 있음. *중괄호와는 상관없다
+        // var는 function키워드 안에 있나 , 밖에 있나만 구분하면됨
+        var v_aa = "def";
+        var f_local = function () {
+            for(;"문자열";){ // 여기 중괄호와 변수 범위는 관계없음
+                var v_aa = "defkid";
+                break;
+            }
+            console.log(v_aa)
+        }
+        f_local();
+        console.log(v_aa)
+    </script>
+</body>
+</html>

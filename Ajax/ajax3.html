@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- js 라이브러리 생성.-->
+    <script src="./myajax.js"></script>
+</head>
+
+<body>
+    <input type="button" value="눌러" id="id_btn">
+    <div id="id_disp" style="border: 1px solid black;"></div>
+    <script>
+
+
+        // 
+        var cnt = 0;
+        var v_btn = document.querySelector("#id_btn");
+        var tblWidth = 0;
+        // document.querySelector("friends > friend:nth-child(1) > age")
+
+        v_btn.addEventListener("click", function () {
+            cnt++;
+            if (cnt == 1) {
+                // console.log(p_rslt.querySelector("friends > friend:nth-child(1) > name"))
+                // /friends/friend[3]/name
+                $.ajax({
+                    async: true,
+                    method: "get",
+                    url: "./data.xml",
+                    dataType: "xml",
+                    success: function (p_rslt) {
+                        var tbl = "<table border=1 id='id_tbl'>";
+                        // console.log((p_rslt))
+                        // console.log(p_rslt.querySelector("friend").querySelector("name").childNodes[0].nodeValue)
+                        // console.log(p_rslt.querySelectorAll("friend name").text())
+                        // console.log(p_rslt.getElementsByTagName("friend")[2])
+                        var friends = p_rslt.getElementsByTagName("friend");
+
+                        for (var i = 0; i < friends.length; i++) {
+                            // tbl += `<tr>
+                            // <td>${friends[i].querySelector("name").childNodes[0].nodeValue}</td> 
+                            // <td>${friends[i].querySelector("age").childNodes[0].nodeValue}</td>
+                            // <td>${friends[i].querySelector("chac").childNodes[0].nodeValue}</td> 
+                            // </tr>`;
+                            tbl += `<tr>
+                            <td>${friends[i].querySelector("name").textContent}</td> 
+                            <td>${friends[i].querySelector("age").textContent}</td>
+                            <td>${friends[i].querySelector("chac").textContent}</td> 
+                            </tr>`;
+
+                            // console.log(friends[1].querySelector("name").textContent)
+                            // console.log(friends[i].querySelector("age").childNodes[0].nodeValue)
+                            // console.log(friends[i].querySelector("chac").childNodes[0].nodeValue)
+                        }
+                        tbl += '</table>';
+                        // console.log(friends.size)
+                        document.querySelector("#id_disp").innerHTML = tbl;
+                        // document.querySelector("#id_tbl").offsetWidth;
+                        document.querySelector("#id_disp").style.width = document.querySelector("#id_tbl").offsetWidth + "px";
+                        // console.log(  document.querySelector("#id_tbl").offsetWidth)
+
+
+
+                    }
+                })
+
+            } //if 끝
+            else if (cnt % 2 == 0) {
+                // console.log("짝수");
+                // v_tblStr = '';
+                document.querySelector("#id_disp").style.display = "none";
+                // return
+
+            } else {
+                document.querySelector("#id_disp").style.display = "";
+            }
+            // console.log(cnt)
+        })
+
+        // $.ajax({
+        //     dataType:"JSON",
+        //     async:true,
+        //     method:"get",
+        //     url:"./data.txt",
+        //     success:function (p_rslt) {
+        //         // 넘어온값으로 잘 사용하기
+        //         // p_rslt 는 responseText를 가져왔으므로 기본적으로 문자열
+        //         // console.log(JSON.parse(p_rslt));
+        //         console.log((p_rslt));
+        //     }
+        // })
+        // alert("동기확인")
+    </script>
+</body>
+
+</html>

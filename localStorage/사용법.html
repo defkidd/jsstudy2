@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //localstorage(브라우져 영구저장소) 사용법 (Cookie 대용으로 많이 사용)
+        // 일부 사이트는 사용자에 관련된 정보만 사용자 브라우져에 저장해서 사용
+        // localstroage느ㅏㄴ 객체를 저장할수없고 문자열만 저장가능하다
+
+        localStorage.setItem("이름","박경신"); // key-value 쓰기 
+        localStorage.setItem("발사이즈","260"); // key-value 형식으로 쓰기
+        localStorage.setItem("이름","박경신짱"); // key값이 존재하기때문에 덮어써진다. map과비슷
+        alert(localStorage.getItem("발사이즈"));//읽기
+        alert("몇개?" + localStorage.length);
+        alert(localStorage.key(0)); // 0번째 index의 key값 
+        // localStorage.clear // 전부지우기
+        // localStorage.removeItem("이름"); //특정  key 값 1개만지우기
+        // localStorage.setItem("bts","great");
+        localStorage.bts="great"// 윗줄과 같다
+    </script>
+</body>
+</html>

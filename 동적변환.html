@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    // 자바스크립트는 동적 언어 ( 데이타 타입이 = 오른쪽값으로 자동할당)
+    "use strict" // 엄격모드 적용
+    var v_str = "문자열";
+    // alert(typeof(v_str)); //
+    var v_num = 272;
+    // alert(typeof(v_num )); 
+    var v_obj ={}; // new Object()와 같은 표현
+    var v_obj = "흥칫뿡"; // 메모리 누수를 가리킴
+    // alert(typeof(v_obj));
+
+    // 자동형변환 발생 문자열은 빈문자열 null false 그외는 true
+    
+    // if ("중프힘들었어요") {
+    //     alert("아니요"); // ? 
+    // }
+
+    // 자동형변환 발생 숫자는 0이외 전부 true
+    // if (-1) {
+    //     alert("아니요"); // ? 
+    // }
+
+    // var v_check = "111" + 272;
+    // alert(v_check);// 111272
+
+    
+    // var v_check1 = "272" - 272;
+    // alert(v_check1);// 0 // 문자열 빼기는 없고 숫자빼기만 존재.
+
+    var v_check2 = "272";
+    alert(typeof(Number(v_check2))); // number 
+    
+    var v_check2 = "272"-0; // * / - 사용하면 숫자로 형변환됨.
+    alert(typeof(v_check2)); // number 
+
+
+
+
+
+</script>

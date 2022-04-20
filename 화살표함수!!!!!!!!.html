@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> => 는 function 키워드를 뺴고 =>가 추가됨 <br>
+    ()매개변수가 1개인경우는 ()도 생략가능 <br>
+    {}안에 return 문만 있는 경우는 return 과 {} 모두 생략가능<br>
+    위의 모둔규칙이 맘에 안들면 ()와 {}모두 사용해도 무방
+    <br>시간이 걸리겠지만 조금씩 function 키워드를 없애자 !!!
+    </h1>
+    <script>
+        //화살표 함수 (일부 제약사항이 있음)
+        // 제약사항이 발생하는 경우는 그냥 function키워드 붙여쓰면 됨
+        
+        // var f_func = function () {
+        //     alert("안뇽")
+        // // }
+        // var f_func = p_arg => { // 매개변수가 하나 일때는 괄호를 생략가능하다
+        //     alert(p_arg)
+        // }
+        // f_func("안뇽");
+
+
+        // var f_func = function(p_arg){
+        //     return p_arg;
+        // }
+        var f_func = p_arg => p_arg+9; //위의 함수와 같은것으로 리턴이 한줄이면 생략할수있다
+        // alert(f_func("fbi"))
+        //alert(f_func(7))
+    </script>
+</body>
+</html>

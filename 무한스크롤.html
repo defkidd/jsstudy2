@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모바일에서 많이쓰는 무한스크롤</title>
+</head>
+<body>
+    <div id="id_disp">    
+    <script>
+        var v_disp = document.querySelector("#id_disp")
+        // 일단 스크롤바가 생겨야 하니까, 더미 데이터를 넣는다
+        for (let i = 1; i <= 30; i++) {
+            document.write("<h2>def kid "+i+"</h2>")            
+            
+        }
+    </script>
+    </div>
+    <script>
+        // 스크롤바 이동, 크롬버그 setTimeout delay를 안걸어주면 먹히지 않는다.
+        setTimeout(function () {
+            window.scrollTo(0,0);
+            
+        },50);
+       
+        // 스크롤 이벤트
+        var f_scroll = function () {
+            var v_scrollTop = parseInt(document.documentElement.scrollTop);
+            var v_clientHeight = document.documentElement.clientHeight;
+            var v_scrollHeight = document.documentElement.scrollHeight;
+            console.log("스크롤바 움직이는지")
+            console.log("top",parseInt(document.documentElement.scrollTop))
+            console.log("view높이",document.documentElement.clientHeight)
+            console.log("문서높이",document.documentElement.scrollHeight)
+            // 실제 사용은 스크롤바가 끝나기 전 조금 위의 값으로 세팅(튜닝)
+            console.log('==============================================')
+            if ((v_scrollTop + v_clientHeight)>= (v_scrollHeight-50)) {
+                console.log("끝")
+                // 여기서 더 볼수 있는 내욜을 추가해준다.
+                // html 문서가 한번끝나면 , 다음에 나오는 document.write는 덮어써진다.
+                for(let i = 1 ; i<=10; i++){
+                    v_disp.innerHTML += "<h1>we on fire</h1>";
+                    
+                    // document.write("<h1>we on fire</h1>")
+                }
+            }
+
+        }
+        window.addEventListener("scroll", f_scroll);
+    </script>
+</body>
+</html>

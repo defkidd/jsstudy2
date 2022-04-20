@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <div id="id_div" style="border: 2px solid black"></div>
+</body>
+<script>
+    //JSON  -> JavaScript Object Notation(JS객체 표기법)
+    // 넓은 의미로는 {} Array 포함 *이것이 정확
+    // 좁은 의미로는 {} 만 지칭
+    // CSV(Comma Seperated Value) 용량이 적어서 다시 사용됨
+    // CSV Ex)이름,나이,별명
+    //        로제,25,베스트
+    // 최근추세는 querySelector와 querySelectorAll을 많이 사용
+    var v_div = document.querySelector("#id_div");
+    v_div.style["background-color"] = "black";
+    v_div.style["color"]="yellow"    
+    v_div.innerHTML="<h1>로제 좋아요?</h1>" // innerHTML은 태그와 태그사이를 의미한다.
+    // console.log(document.body.innerHTML)
+
+    var name="hello";
+    var v_obj = {
+        "name":"로제", //속성추가
+        "age":25 ,// 속성 추가
+        getAge:function () { // 메소드 추가
+            return age;
+        }
+    }
+    //키값은 자동으로 문자열 처리된다
+    console.log(v_obj.hello); // ? 
+
+    var name="hello";
+    
+    // 배열식 접근법
+    var v_obj = {
+        ["name"]:"로제2", //속성추가
+        ["age"]:25 ,// 속성 추가
+       
+    }
+    console.log(v_obj.name);
+
+    var name="hello";
+    
+    // 배열식 접근법
+    var v_obj = {
+        [name]:"로제3", //속성추가
+        [name1]:"로제4", //속성추가
+        ["age"]:25 // 속성 추가
+       
+    }
+    console.log(v_obj.hello);
+
+    // 속성지우는건 delete
+    var name="hello";
+    
+    // 배열식 접근법
+    var v_obj = {
+        [name]:"로제3", //속성추가
+        ["age"]:25 // 속성 추가
+       
+    }
+    delete v_obj.age;
+    console.log(v_obj);
+  
+</script>

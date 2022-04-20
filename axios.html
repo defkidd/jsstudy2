@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise가  callback지옥의 해결책으로 나와서 잠깐은 인정 받았지만, 
+        // 개발자들은 then,then, 지옥
+        // 그 다음에 나온 것이 async await
+        //원래 Ajax
+        const ajax = () => {
+            const c_xhr = new XMLHttpRequest();
+            c_xhr.open("메소드","url","비동기여부");
+            c_xhr.onreadystatechange = ()=>{
+                if (c_xhr.readyState == 4 && c_xhr.status ==200) {
+                    console.log(c_xhr.responseText);
+                }
+            }
+            c_xhr.send();
+        }
+
+        const axios = {}; // 네임스페이스용 껍데기 객체
+        axios.getJson = p_url=>{
+            return new Promise((resolve,reject)=>{
+                const c_xhr = new XMLHttpRequest();
+                c_xhr.open("get",p_url,true);
+                c_xhr.onreadystatechange = ()=>{
+                    if (c_xhr.readyState == 4 && c_xhr.status ==200) {
+                        console.log(c_xhr.responseText);
+                        resolve(JSON.parse(c_xhr.responseText));
+                    }
+                }
+                c_xhr.send();
+            });
+        }
+        // async , await 키워드
+        // async로 감싼 함수자체가 비동기이고 그안의 실행들이 동기식으로 이루어진다
+        async function f_async() {
+            let l_rslt = await axios.getJson("./Ajax/data.txt");
+            console.log("결과",l_rslt)
+        }
+        f_async();
+        // console.log(axios.getJson("./Ajax/data.txt"))
+        // axios.getJson("./Ajax/data.txt").then( p_rslt => {
+        //     console.log("넘어온값은",p_rslt)
+        // }).finally (()=>{
+        //     console.log("finllay")
+        // });
+
+  
+        
+    </script>
+</body>
+</html>
