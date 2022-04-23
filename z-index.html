@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .class_box {
+            position: absolute;
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+        #id_box1 {
+            position: absolute;
+            z-index: 1;
+        }
+
+        #id_box2 {
+            position: absolute;
+            z-index: 2;
+        }
+
+        #id_box3 {
+            position: absolute;
+            z-index: 3;
+        }
+
+        #id_box4 {
+            position: absolute;
+            z-index: 4;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="button" value="이전" id="id_prev">
+    <input type="button" value="넘기기" id="id_next">
+    <div id="container">
+
+        <div class="class_box">
+            <img src="./images/1.jpg" alt="1">1
+        </div>
+        <div class="class_box">
+            <img src="./images/2.jpg" alt="2">2
+        </div>
+        <div class="class_box">
+            <img src="./images/3.jpg" alt="3">3
+        </div>
+        <div class="class_box">
+            <img src="./images/4.jpg" alt="4">4
+        </div>
+    </div>
+
+
+    <script>
+        const c_img = document.querySelectorAll(".class_box");
+
+        const c_nxtBtn = document.querySelector("#id_next");
+        const c_prevBtn = document.querySelector("#id_prev");
+
+
+        let cnt = 0;
+
+        const f_nxtClick = () => {
+            if (cnt == c_img.length) {
+                cnt = 0;
+            }
+            console.log(cnt);
+
+            for (let i = 0; i < c_img.length; i++) {
+                c_img[i].style.zIndex = i;
+                if (i == cnt) {
+                    c_img[cnt].style.zIndex = 100;
+                }
+            }
+            cnt++;
+        }
+
+        c_nxtBtn.addEventListener("click", f_nxtClick);
+
+        const f_prevClick = () => {
+            cnt--;
+
+            if (cnt < 0) {
+                cnt = c_img.length - 1
+            }
+
+            console.log(cnt);
+            for (let i = 0; i < c_img.length; i++) {
+                c_img[i].style.zIndex = i;
+                // console.log(c_img[i]);
+                if (i == cnt) {
+                    if (cnt == 0) {
+                        console.log("ddd");
+                        c_img[c_img.length - 1].style.zIndex = 100;
+                        break;
+                    } else {
+                        c_img[cnt - 1].style.zIndex = 100;
+                        break;
+
+                    }
+                }
+            }
+
+
+
+        }
+
+        c_prevBtn.addEventListener("click", f_prevClick);
+
+    </script>
+</body>
+
+</html>

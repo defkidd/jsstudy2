@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //ES6이상 부터는 namespace 개념보다는 모듈개념을
+        // 자바는 모듈 지원을 11부터
+        // library vs module
+        // library 는 필요한 정보를 내가 뽑아쓰는거 
+        // module은 필요한기능들이 세트단위로 구성되어 있는거
+    </script>
+    <script type="module">
+        "use strict"
+        // import문은 module안에서만 사용할수 있다
+        // as를 이용해서 이름변경, default는 원하는이름으로 받을수있음 
+        // default일경우 import 아무이름 from "module"
+        // node.js 를 쓰게 되면 import 대신에 require를 쓰기도함.
+        // ESM(EcmaScript Module)은 import 사용 (표준)
+        import def from "./sample.js";
+        console.log(def)
+        // def()
+        import { c_obj1 as roze } from "./sample.js";
+        console.log(roze)
+        import { c_obj1,c_obj2 } from "./sample.js";
+        c_obj1.name = "defkid"
+        console.log(c_obj1)
+
+        // 한번에 가져오기
+        // Module을 한번에 가져올때는 이름을 꼭지정해줘야 한다 
+        // (여러개의 Module이 있을경우 어떤 걸 지칭하는지 알수없기때문에)
+        import * as defkid from "./sample.js"
+        console.log()
+        console.log(defkid)
+        console.log(defkid.c_obj1)
+        console.log(defkid.c_obj2)
+        console.log(defkid.default)
+        defkid.default()
+    </script>
+</body>
+</html>
