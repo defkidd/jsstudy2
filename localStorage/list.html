@@ -8,6 +8,7 @@
 
     <title>Document</title>
     <script src="./jsp.js"></script>
+    <script src="../Ajax/myajax.js"></script>
     <style>
         .current {
             color: red;
@@ -76,6 +77,9 @@
         if (request.getParameter("page") != null) {
             v_curPage = request.getParameter("page")
         }
+        // if (request.getParameter("modPage") != null) {
+        //     f_searchBtn();
+        // }
         var v_totalPage = Math.ceil(v_guls.length / v_gulSuperPage); // 소수점이 떨어짐.
         var v_startGulNum = (v_curPage - 1) * v_gulSuperPage;
         var v_endGulNum = v_startGulNum + (v_gulSuperPage - 1);
@@ -188,6 +192,8 @@
         // }
         // v_searchBox.addEventListener("change", f_searchTitle)
         let f_searchBtn = () => {
+
+            console.log("ddd")
             if (v_searchText.value == "") {
                 return;
             }
@@ -246,13 +252,13 @@
 
                 v_tblStr += "</table><br>";
                 document.querySelector("#id_disp").innerHTML = v_tblStr;
-                v_curPage = request.getParameter("modPage")
+                // v_curPage = request.getParameter("modPage")
                 for (var i = 1; i <= v_totalPage; i++) {
                     if (i == v_curPage) {
 
-                        v_tblStr += "<a class ='current' href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                        v_tblStr += "<a  id='id_modPage' class ='current' href ='list.html?page=" + i + "'>" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
                     } else {
-                        v_tblStr += "<a href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                        v_tblStr += "<a  href =list.html?page=" + i + " >" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
                     }
                 }
                 v_tblStr += "<br><input type='button' id='id_del' value='선택한것삭제'>"
@@ -283,19 +289,19 @@
 
         }
         v_searchBtn.addEventListener("click", f_searchBtn)
-        if (request.getParameter("modPage") != null) {
-            v_curPage = request.getParameter("modPage")
-            for (var i = 1; i <= v_totalPage; i++) {
-                if (i == v_curPage) {
+        // if (request.getParameter("modPage") != null) {
+        //     v_curPage = request.getParameter("modPage")
+        //     for (var i = 1; i <= v_totalPage; i++) {
+        //         if (i == v_curPage) {
 
-                    v_tblStr += "<a class ='current' href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-                } else {
-                    v_tblStr += "<a href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
-                }
-            }
-            v_tblStr += "<br><input type='button' id='id_del' value='선택한것삭제'>"
-            document.querySelector("#id_disp").innerHTML = v_tblStr;
-        }
+        //             v_tblStr += "<a class ='current' href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+        //         } else {
+        //             v_tblStr += "<a href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+        //         }
+        //     }
+        //     v_tblStr += "<br><input type='button' id='id_del' value='선택한것삭제'>"
+        //     document.querySelector("#id_disp").innerHTML = v_tblStr;
+        // }
         // let $ = {};
         // $.ajax = () => {
 
