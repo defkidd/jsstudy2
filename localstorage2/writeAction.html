@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // console.log(location.href)
+        // console.log(location.href.split("?")[1])
+        // console.log(location.href.split("?")[1].split("&"))
+        let v_query = location.href.split("?")[1].split("&");
+        let request = {};
+        request.getParameter = (p_param) => {
+            if (location.href.indexOf("?") == -1) {
+                return null;
+            }
+            for (let i = 0; i < v_query.length; i++) {
+                let v_keys = v_query[i].split("=")[0];
+                let v_value = v_query[i].split("=")[1];
+                if (v_keys == p_param) {
+                    console.log(decodeURIComponent(v_value));
+                    return decodeURIComponent(v_value).replaceAll("+", "");
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

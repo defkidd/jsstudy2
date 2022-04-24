@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>과제</h1>
+    <form action="writeAction.html" method="">
+
+        제목 : <input type="text" name="nm_title" id="" required><br>
+        글쓴이 : <input type="text" name="nm_writer" id="" required><br>
+        글쓴이 스킬 :<br>
+        java:<input type="checkbox" name="nm_skills" value="java">
+        python:<input type="checkbox" name="nm_skills" value="python">
+        oracle:<input type="checkbox" name="nm_skills" value="oracle" checked>
+        spring:<input type="checkbox" name="nm_skills" value="spring">
+        <hr>
+        내용: <br>
+        <textarea name="nm_content" id="" cols="30" rows="10" required></textarea><br>
+        <button>글쓰기</button>
+    </form>
+
+</body>
+<script>
+    const c_title = document.querySelector("[name='nm_title']");
+    const c_writer = document.querySelector("input[name=nm_writer");
+    const c_skills = document.querySelectorAll("input[name=nm_skills");
+    let cnt = 0;
+    let cnt2 = 0;
+
+    console.log(c_skills.length);
+    let f_click = e => {
+
+        if (e.target.checked) {
+            cnt++;
+        } else {
+            cnt--;
+        }
+        if (cnt > 3) {
+            console.log(cnt);
+            cnt--;
+            e.target.checked = false;
+            alert("3개 ㄴ ")
+        }
+    }
+    for (let i = 0; i < c_skills.length; i++) {
+        if (c_skills[i].checked) {
+            cnt++;
+        }
+        c_skills[i].addEventListener("click", f_click)
+        console.log(cnt)
+
+    }
+
+</script>
+
+</html>

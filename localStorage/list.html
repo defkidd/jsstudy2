@@ -19,11 +19,29 @@
 <body>
     <input type="button" value="클릭" id="id_btn">
     <h1>꼉시니>3&lt 게시판 리스트</h1>
+    <!-- <select name="" id="id_searchTitle">
+        <option value="">제목</option>
+    </select>
+    <select name="" id="id_searchContent">
+        <option value="">내용</option>
+    </select> -->
+    <select name="" id="id_searchBox">
+        <option value="내용" selected>내용</option>
+        <option value="">제목</option>
+    </select>
+    검색<input type="text" name="" id="id_searchText">
+    <input type="button" value="검색" id="id_searchBtn">
     <div id="id_disp"></div> <!-- 출력용-->
     <a href="./write.html">글쓰기</a>
 
     <script>
+        let v_searchBtn = document.querySelector("#id_searchBtn");
+        let v_searchText = document.querySelector("#id_searchText");
+        // let v_searchTitle = document.querySelector("#id_searchTitle");
+        // let v_searchContent = document.querySelector("#id_searchContent");
+        let v_searchBox = document.querySelector("#id_searchBox");
         var v_btn = document.querySelector("#id_btn");
+
         var f_serialize = function (p_form) {
             var v_elements = p_form.elements;
             var v_returnStr = "";
@@ -48,9 +66,9 @@
         v_btn.addEventListener("click", f_click)
         var v_tblName = "Gesi";
         var v_guls = JSON.parse(localStorage.getItem(v_tblName)); // 배열
-        v_guls.sort(function (a,b) {
-            return b.pid-a.pid;
-        })
+        // v_guls.sort(function (a,b) {
+        //     return b.pid-a.pid;
+        // })
         // v_guls = v_guls.reverse()
         // 페이징 처리 
         var v_gulSuperPage = 10; // 페이지당 그 ㄹ수 
@@ -64,18 +82,23 @@
         if (v_endGulNum > v_guls.length) {
             v_endGulNum = v_guls.length - 1
         }
+        let v_selTitle = "";
+        let v_selContent = "";
         var v_tblStr = "<table border=1>";
         v_tblStr += "<tr><th>순번</th><th>제목</th><th>글쓴이</th><th>기술</th><th>삭제</th></tr>"
 
         for (let index = v_startGulNum; index <= v_endGulNum; index++) {
             v_tblStr += "<tr>";
             // v_tblStr +="<td>"+(index+1) + "</td>";
-            v_tblStr += "<td>" + (index+1)+ "</td>";
+            v_tblStr += "<td>" + (index + 1) + "</td>";
             v_tblStr += "<td><a href ='http://naver.com' onclick='f_open(" + v_guls[index].pid + ")'>" + v_guls[index].v_title + "</a></td>";
             v_tblStr += "<td>" + v_guls[index].v_writer + "</td>";
             v_tblStr += "<td>" + v_guls[index].v_skills + "</td>";
             v_tblStr += "<td><input type=checkbox name='nm_del' value ='" + v_guls[index].pid + "'></td>";
             v_tblStr += "</tr>";
+            // v_selTitle += `<option value>${v_guls[index].v_title}</option>`;
+            // v_selContent += `<option value>${v_guls[index].v_content}</option>`;
+
 
         }
         v_tblStr += "</table><br>";
@@ -90,6 +113,16 @@
         }
         v_tblStr += "<br><input type='button' id='id_del' value='선택한것삭제'>"
         document.querySelector("#id_disp").innerHTML = v_tblStr;
+        // for (let i = 0; i < v_guls.length; i++) {
+        //     v_selTitle += `<option value>${v_guls[i].v_title}</option>`;
+        //     v_selContent += `<option value>${v_guls[i].v_content}</option>`;
+
+        // }
+
+        // document.querySelector("#id_searchTitle").innerHTML = v_selTitle;
+        // document.querySelector("#id_searchContent").innerHTML = v_selContent;
+
+
         var v_del = document.querySelectorAll("input[name=nm_del]")
         var v_delBtn = document.querySelector("#id_del")
         var v_delArray = []
@@ -143,6 +176,142 @@
             }
 
         })
+        let v_titleArray = [];
+        let v_contentArray = [];
+        for (let i = 0; i < v_guls.length; i++) {
+            v_titleArray.push(v_guls[i].v_title);
+            v_contentArray.push(v_guls[i].v_content);
+
+        }
+        // let f_searchTitle = () => {
+        //     console.log("dd");
+        // }
+        // v_searchBox.addEventListener("change", f_searchTitle)
+        let f_searchBtn = () => {
+            if (v_searchText.value == "") {
+                return;
+            }
+            // location.replace("list.html?modPage")
+
+            // location.href = "list.html?modPage"
+            let v_searchGuls = [];
+            console.log(v_searchBox[v_searchBox.selectedIndex].text);
+            if (v_searchBox[v_searchBox.selectedIndex].text == "제목") {
+                v_titleArray.includes(v_searchText.value)
+                for (let i = 0; i < v_guls.length; i++) {
+                    let temp = {};
+                    if (v_guls[i].v_title.includes(v_searchText.value)) {
+                        temp.pid = v_guls[i].pid;
+                        temp.v_title = v_guls[i].v_title;
+                        temp.v_skills = v_guls[i].v_skills;
+                        temp.v_content = v_guls[i].v_content;
+                        temp.v_writer = v_guls[i].v_writer;
+                    }
+                    if (temp.pid != null) {
+                        v_searchGuls.push(temp);
+                    }
+
+                }
+                // v_gulSuperPage = 10; // 페이지당 그 ㄹ수 
+                // var v_curPage = 1; // 현재 페이지 넘버 ,일단 1페이지
+                if (request.getParameter("page") != null) {
+                    v_curPage = request.getParameter("page")
+                }
+                var v_totalPage = Math.ceil(v_searchGuls.length / v_gulSuperPage); // 소수점이 떨어짐.
+                var v_startGulNum = (v_curPage - 1) * v_gulSuperPage;
+                var v_endGulNum = v_startGulNum + (v_gulSuperPage - 1);
+                if (v_endGulNum > v_searchGuls.length) {
+                    v_endGulNum = v_searchGuls.length - 1
+                }
+                // console.log(v_searchGulsPerPage)
+                console.log(v_searchGuls.length)
+                console.log(v_searchGuls)
+                document.querySelector("#id_disp").innerHTML = "";
+                v_tblStr = "<table border=1>";
+                v_tblStr += "<tr><th>순번</th><th>제목</th><th>글쓴이</th><th>기술</th><th>삭제</th></tr>"
+                for (let index = v_startGulNum; index <= v_endGulNum; index++) {
+                    // if (v_guls[index].v_title.includes(v_searchText.value)) {
+                    v_tblStr += "<tr>";
+                    v_tblStr += "<td>" + (v_searchGuls[index].pid) + "</td>";
+                    v_tblStr += "<td><a href ='http://naver.com' onclick='f_open(" + v_searchGuls[index].pid + ")'>" + v_searchGuls[index].v_title + "</a></td>";
+                    v_tblStr += "<td>" + v_searchGuls[index].v_writer + "</td>";
+                    v_tblStr += "<td>" + v_searchGuls[index].v_skills + "</td>";
+                    v_tblStr += "<td><input type=checkbox name='nm_del' value ='" + v_searchGuls[index].pid + "'></td>";
+                    v_tblStr += "</tr>";
+                    // return;
+                    // }
+
+
+                }
+
+                v_tblStr += "</table><br>";
+                document.querySelector("#id_disp").innerHTML = v_tblStr;
+                v_curPage = request.getParameter("modPage")
+                for (var i = 1; i <= v_totalPage; i++) {
+                    if (i == v_curPage) {
+
+                        v_tblStr += "<a class ='current' href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                    } else {
+                        v_tblStr += "<a href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                    }
+                }
+                v_tblStr += "<br><input type='button' id='id_del' value='선택한것삭제'>"
+                document.querySelector("#id_disp").innerHTML = v_tblStr;
+            } else {
+                document.querySelector("#id_disp").innerHTML = "";
+                v_tblStr = "<table border=1>";
+                v_tblStr += "<tr><th>순번</th><th>제목</th><th>글쓴이</th><th>기술</th><th>삭제</th></tr>"
+                for (let index = 0; index < 108; index++) {
+                    if (v_guls[index].v_content.includes(v_searchText.value)) {
+                        v_tblStr += "<tr>";
+                        v_tblStr += "<td>" + (index + 1) + "</td>";
+                        v_tblStr += "<td><a href ='http://naver.com' onclick='f_open(" + v_guls[index].pid + ")'>" + v_guls[index].v_title + "</a></td>";
+                        v_tblStr += "<td>" + v_guls[index].v_writer + "</td>";
+                        v_tblStr += "<td>" + v_guls[index].v_skills + "</td>";
+                        v_tblStr += "<td><input type=checkbox name='nm_del' value ='" + v_guls[index].pid + "'></td>";
+                        v_tblStr += "</tr>";
+                        // return;
+                    }
+
+
+                }
+
+                v_tblStr += "</table><br>";
+                document.querySelector("#id_disp").innerHTML = v_tblStr;
+            }
+            console.log(v_searchText.value);
+
+        }
+        v_searchBtn.addEventListener("click", f_searchBtn)
+        if (request.getParameter("modPage") != null) {
+            v_curPage = request.getParameter("modPage")
+            for (var i = 1; i <= v_totalPage; i++) {
+                if (i == v_curPage) {
+
+                    v_tblStr += "<a class ='current' href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                } else {
+                    v_tblStr += "<a href =list.html?modPage=" + i + ">" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                }
+            }
+            v_tblStr += "<br><input type='button' id='id_del' value='선택한것삭제'>"
+            document.querySelector("#id_disp").innerHTML = v_tblStr;
+        }
+        // let $ = {};
+        // $.ajax = () => {
+
+        //     let xhr = new XMLHttpRequest();
+        //     xhr.open("get", "list.html", false)
+        //     xhr.onreadystatechange = () => {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+
+        //             console.log(document.querySelector("#id_disp>td"))
+        //             return;
+        //         }
+
+        //     }
+        //     xhr.send();
+        // }
+        // $.ajax();
 
         var child;// 열린창 제어를 위한 변수
         var f_open = function (p_pid) {

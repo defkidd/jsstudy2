@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const c_tblName = "ex";
+        let v_tblDatas = [];
+        for (let index = 1; index <= 108; index++) {
+            let v_dataJson = {};
+            v_dataJson.pid = index;
+            v_dataJson.title = "제목" + index;
+            v_dataJson.writer = "글쓴이" + index;
+            v_dataJson.content = "내용" + index;
+            let v_skills = ["oracle", "spring", "java", "python"]
+            let count = v_skills.length;
+            for (let i = 0; i < Math.floor(Math.random() * count + 1); i++) {
+                // Math.floor(Math.random() * 4)\
+                v_skills.splice(Math.floor(Math.random() * v_skills.length), 1);
+
+            }
+            v_dataJson.skills = v_skills;
+            v_tblDatas.push(v_dataJson)
+        }
+        console.log(v_tblDatas)
+        localStorage.setItem(c_tblName, JSON.stringify(v_tblDatas))
+
+    </script>
+</body>
+
+</html>

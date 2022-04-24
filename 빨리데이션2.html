@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Validation(유효성검사)</title>
@@ -9,27 +10,27 @@
     // DOMContentLoaded vs load 이벤트
     // DOMContentLoaded는 이미지상관없이 태그만 읽고 이벤트발생
     // load 는 태그 - 이미지 로딩까지 끝나야 발생
-    window.addEventListener("load",function () {
-        
+    window.addEventListener("load", function () {
+
         console.log(document.querySelector("#id_form"));
     })
 </script>
+
 <body>
     <!-- 요즘 방식 하도 똑같은 자바스크립트소스가 반복 사용되다보니 해당기느을 아예 만들어줌-->
     <!-- key value 가 꼭필요한건 attribute 혼자만 써도되는거면 property-->
     <!-- readonly는 value 값을 전달하고 disabled는 값을 전달하지못함-->
     <form id="id_form" action="시작.html" onsubmit="return f_submit()">
-        아이디 <input id="id_id" type="text" name="nm_id" value="dddd" 
-        required="required" placeholder="바닥글" readonly><br>
-    암호 <input id="id_pw" type="password" name="nm_pw" 
-    required placeholder="바닥글" autofocus><br>
-    전화번호 <input type="text" name="nm_tel" id="id_tel"
-    required pattern="010-[0-9]{3,4}-[0-9]{4}" placeholder="000-0000-0000"><br>
-    <input type="submit" value="전송">
+        아이디 <input id="id_id" type="text" name="nm_id" value="dddd" required="required" placeholder="바닥글" readonly><br>
+        암호 <input id="id_pw" type="password" name="nm_pw" required placeholder="바닥글" autofocus><br>
+        전화번호 <input type="text" name="nm_tel" id="id_tel" required pattern="010-[0-9]{3,4}-[0-9]{4}"
+            placeholder="000-0000-0000"><br>
+        <input type="submit" value="전송">
 
-</form>
+    </form>
 
 
 
 </body>
+
 </html>
