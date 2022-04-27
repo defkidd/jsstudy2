@@ -191,22 +191,32 @@
         //     console.log("dd");
         // }
         // v_searchBox.addEventListener("change", f_searchTitle)
-        let f_searchBtn = () => {
+        let v_searchWord = v_searchText.value;
+        let f_xxx = () => {
+            // event.preventDefault();
+            v_searchWord = v_searchText.value;
+            f_searchBtn(v_searchWord)
+        }
 
-            console.log("ddd")
-            if (v_searchText.value == "") {
-                return;
-            }
+        let f_searchBtn = (p_search, p_searchBox) => {
+            // event.preventDefault();
+            console.log(p_search)
+            console.log(p_searchBox)
+            // if (v_searchText.value == "") {
+            //     return;
+            // }
+            console.log("ddd1")
             // location.replace("list.html?modPage")
 
-            // location.href = "list.html?modPage"
+            // location.href = "list.html?page=2"
             let v_searchGuls = [];
             console.log(v_searchBox[v_searchBox.selectedIndex].text);
-            if (v_searchBox[v_searchBox.selectedIndex].text == "제목") {
-                v_titleArray.includes(v_searchText.value)
+            if (v_searchBox[v_searchBox.selectedIndex].text == "제목" || p_searchBox == "제목") {
+                console.log("d12")
+                v_titleArray.includes(p_search)
                 for (let i = 0; i < v_guls.length; i++) {
                     let temp = {};
-                    if (v_guls[i].v_title.includes(v_searchText.value)) {
+                    if (v_guls[i].v_title.includes(p_search)) {
                         temp.pid = v_guls[i].pid;
                         temp.v_title = v_guls[i].v_title;
                         temp.v_skills = v_guls[i].v_skills;
@@ -256,9 +266,9 @@
                 for (var i = 1; i <= v_totalPage; i++) {
                     if (i == v_curPage) {
 
-                        v_tblStr += "<a  id='id_modPage' class ='current' href ='list.html?page=" + i + "'>" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                        v_tblStr += "<a  id='id_modPage' class ='current' href ='list.html?page=" + i + "&searchWord=" + p_search + "&searchBox=제목'>" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
                     } else {
-                        v_tblStr += "<a  href =list.html?page=" + i + " >" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+                        v_tblStr += "<a  href ='list.html?page=" + i + "&searchWord=" + p_search + "&searchBox=제목'>" + i + "</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
                     }
                 }
                 v_tblStr += "<br><input type='button' id='id_del' value='선택한것삭제'>"
@@ -285,10 +295,20 @@
                 v_tblStr += "</table><br>";
                 document.querySelector("#id_disp").innerHTML = v_tblStr;
             }
-            console.log(v_searchText.value);
 
         }
-        v_searchBtn.addEventListener("click", f_searchBtn)
+        console.log(v_searchText.value);
+        v_searchBtn.addEventListener("click", f_xxx)
+        // v_searchBtn.addEventListener("click", f_searchBtn.bind("bind", v_searchWord))
+        if (request.getParameter("searchWord") != null) {
+            console.log(request.getParameter("searchWord"));
+            // v_searchBox[v_searchBox.selectedIndex].text = request.getParameter("searchBox")
+            v_searchWord.value = request.getParameter("searchWord");
+            let x = (request.getParameter("searchWord"));
+            console.log(x);
+            f_searchBtn(x, request.getParameter("searchBox"))
+
+        }
         // if (request.getParameter("modPage") != null) {
         //     v_curPage = request.getParameter("modPage")
         //     for (var i = 1; i <= v_totalPage; i++) {

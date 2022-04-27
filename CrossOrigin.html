@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Origin : 프로토콜 + 서버명(도메인명)+포트번호 3개로 구성
+        1개라도 다르면 다른 오리진, 포트번호총개수 (64K(64 * 2의 10승))
+        오리진이 섞이는 걸 Cross Origin 이라고 부름
+        울 부모님이 아닌 옆집 부모님에게 요청하는것
+        Ajax에서만 기본적으로 Cross Origin 제약 사항이 있음
+        (서버 관리자가 설정으로 풀어주거나 다른것까지 막을 수 있음)
+        CORS ( Cross origin resource sharing)
+        왜 브라우져에서는 되는데 ajax 로 하면 안될까?
+        이유는 받으면 데이터가 메모리상에 올라가서 ,변수 취급을 받고 조작이 가능하기때문에.
+        script src="", img src=""
+
+    -->
+    <script>
+        const xhr = new XMLHttpRequest();
+        let url = "https://www.flickr.com/services/feeds/photos_public.gne?"
+        xhr.open('GET', url + "target=cat", true);
+        // xhr.open('GET', "http://localhost:8405/basic/ajax/start", true);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                alert(xhr.responseText);
+            }
+        }
+        xhr.send();
+    </script>
+</body>
+
+</html>
