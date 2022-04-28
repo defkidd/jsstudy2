@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #id_disp {
+            border: 1px solid black;
+            position: relative;
+        }
+
+        .bar {
+            width: 20px;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    값들<input type="text" id="id_values" size="40" value="100,200,300,400,500"><br>
+    <input type="button" value="차트 가로 그리깅" id="id_draw">
+    <input type="button" value="차트 세로 그리깅" id="id_drawVertical">
+    <div id="id_disp"></div>
+    <script>
+        const c_disp = document.querySelector("#id_disp");
+        const c_values = document.querySelector("#id_values");
+        const c_draw = document.querySelector("#id_draw");
+        const c_drawVertical = document.querySelector("#id_drawVertical");
+
+        const colors = "0123456789abcdef";
+        const f_ranColor = () => {
+            let colorX16 = "#"
+            for (let i = 1; i <= 6; i++) {
+                colorX16 += colors[Math.floor(Math.random() * colors.length)];
+            }
+            return colorX16;
+        }
+
+        const f_draw = () => {
+            c_disp.innerHTML = "";
+            let values = c_values.value.split(",");
+            let temp = 0;
+            for (let i = 0; i < values.length; i++) {
+                if (temp < parseInt(values[i])) {
+                    temp = parseInt(values[i]);
+                }
+
+            }
+            console.log(temp)
+            c_disp.style.height = temp + "px";
+            for (let i = 0; i < values.length; i++) {
+                let bar = document.createElement("div");
+                bar.style.height = values[i] + "px";
+                bar.setAttribute("class", "bar");
+                bar.style.bottom = 0 + "px";
+                bar.style.left = (i * 30 + 5) + "px";
+
+                bar.style.backgroundColor = f_ranColor();
+                c_disp.appendChild(bar);
+                console.log(document.querySelector(".bar").position)
+            }
+        }
+        c_draw.addEventListener("click", f_draw);
+
+    </script>
+</body>
+
+</html>
