@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-        <script>
-            // 자바스크립트 function 키워드는 class(생성자)의 의미로도 쓰일 수 있다.
-            var DEF = function(p_name,p_mood) { // class의 의미 , 또는 constructor(생성자의 의미)
+    <script>
+        // 자바스크립트 function 키워드는 class(생성자)의 의미로도 쓰일 수 있다.
+        var DEF = function (p_name, p_mood) { // class의 의미 , 또는 constructor(생성자의 의미)
 
-                // this.name ="KID";
-                // this.mood="anger";
-                this.name = p_name;
-                this.mood = p_mood;
-                // this.getName = function () { 이방식으로 써도 되지만 메모리 낭비때문에 쓰지않는다
-                //     return this.name;
-                // }
-                return this; // 클래스개념으로 function을 사용할때는 이게 생략되어있다
+            // this.name ="KID";
+            // this.mood="anger";
+            this.name = p_name;
+            this.mood = p_mood;
+            // this.getName = function () { 이방식으로 써도 되지만 메모리 낭비때문에 쓰지않는다
+            //     return this.name;
+            // }
+            return this; // 클래스개념으로 function을 사용할때는 이게 생략되어있다
 
-            }
-            
-            // prototype(원형)에 메소드 추가
-            DEF.prototype.getName = function () {
-                return this.name;
-            }
-            DEF.prototype.getMood = function () {
-                this.mood="anger"
-                return this.mood;
-            }
-            
-            var cloneDEF = new DEF("KID","happy");
-            console.log(cloneDEF)
-            var cloneDEF1 = new DEF("KIDD","unhappy");
-            console.log(cloneDEF1)
-            var cloneDEF2 = new DEF("KIDD","unhappy");
-            console.log(cloneDEF2.getMood())
-            </script>
+        }
+
+        // prototype(원형)에 메소드 추가
+
+
+        DEF.prototype.getName = function () {
+            return this.name;
+        }
+
+
+        DEF.prototype.getMood = function () {
+            this.mood = "anger"
+            return this.mood;
+        }
+
+        var cloneDEF = new DEF("KID", "happy");
+        console.log(cloneDEF)
+        var cloneDEF1 = new DEF("KIDD", "unhappy");
+        console.log(cloneDEF1)
+        var cloneDEF2 = new DEF("KIDD", "unhappy");
+        console.log(cloneDEF2.getMood())
+    </script>
 </body>
+
 </html>

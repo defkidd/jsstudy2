@@ -14,10 +14,25 @@
             width: 20px;
             position: absolute;
             animation-name: chartMove;
-            animation-delay: 0s;
-            animation-duration: 3s;
+            /* animation-delay: 0s; */
+            animation-duration: 2s;
             animation-iteration-count: 1;
-            animation-fill-mode: forwards;
+            /* animation-fill-mode: forwards; */
+            border-radius: 5px 5px 0 0;
+            opacity: 0.8;
+        }
+
+        .bar:active {
+
+            width: 40px;
+            background-color: black;
+            color: black;
+        }
+
+        .bar:hover {
+            box-shadow: 5px 5px 1px 1px rgba(0, 0, 255, .2);
+            margin: 0 -5px;
+            transition: 0.4s;
         }
 
         .chart-desc {
@@ -28,13 +43,10 @@
         @keyframes chartMove {
             0% {
                 /* keyframe */
-                width: 0px;
+                height: 0px;
             }
 
-            100% {
-                /* keyframe */
-                width: 20px;
-            }
+
         }
     </style>
 </head>
@@ -70,7 +82,7 @@
 
             }
             console.log(temp)
-            c_disp.style.height = temp + "px";
+            c_disp.style.height = temp + 10 + "px";
             c_disp.style.width = (35 * values.length) + "px";
             for (let i = 0; i < values.length; i++) {
                 let bar = document.createElement("div");
