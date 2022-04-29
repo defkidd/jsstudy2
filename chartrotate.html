@@ -13,6 +13,28 @@
         .bar {
             width: 20px;
             position: absolute;
+            animation-name: chartMove;
+            animation-delay: 0s;
+            animation-duration: 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        .chart-desc {
+            position: absolute;
+            text-align: center;
+        }
+
+        @keyframes chartMove {
+            0% {
+                /* keyframe */
+                width: 0px;
+            }
+
+            100% {
+                /* keyframe */
+                width: 20px;
+            }
         }
     </style>
 </head>
@@ -49,6 +71,7 @@
             }
             console.log(temp)
             c_disp.style.height = temp + "px";
+            c_disp.style.width = (35 * values.length) + "px";
             for (let i = 0; i < values.length; i++) {
                 let bar = document.createElement("div");
                 bar.style.height = values[i] + "px";
@@ -57,8 +80,12 @@
                 bar.style.left = (i * 30 + 5) + "px";
 
                 bar.style.backgroundColor = f_ranColor();
+                let chartDesc = document.createElement("span");
+                chartDesc.textContent = i;
+                chartDesc.className = "chart-desc";
+                chartDesc.style.bottom = -20 + "px";
                 c_disp.appendChild(bar);
-                console.log(document.querySelector(".bar").position)
+                bar.appendChild(chartDesc);
             }
         }
         c_draw.addEventListener("click", f_draw);
