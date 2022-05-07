@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .nemo {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            border: 1px solid black;
+
+        }
+
+        .empty {
+            display: inline-block;
+            border: 1px solid white;
+            width: 20px;
+            height: 20px;
+            color: white;
+
+        }
+
+        /* 
+        #id_disp2 {
+            display: flex;
+            justify-content: flex-end;
+        } */
+    </style>
+</head>
+
+<body>
+    <div id="id_disp"></div>
+    <div id="id_disp2"></div>
+    <div id="id_disp3"></div>
+    <div id="id_disp4"></div>
+    <script>
+        const c_disp = document.querySelector("#id_disp");
+        const c_disp2 = document.querySelector("#id_disp2");
+        const c_disp3 = document.querySelector("#id_disp3");
+        const c_disp4 = document.querySelector("#id_disp4");
+
+        function f_ranColor() {
+            return "rgb(" + Math.floor(Math.random() * 256) + ","
+                + Math.floor(Math.random() * 256) + ","
+                + Math.floor(Math.random() * 256) + ")"
+        }
+
+        function f_nemo(p_char) {
+            let l_nemo = document.createElement("div");
+            l_nemo.setAttribute("class", "nemo");
+            if (p_char == "*") {
+                l_nemo.style.backgroundColor = f_ranColor();
+                l_nemo.style.color = f_ranColor();
+                l_nemo.innerHTML = "*";
+            }
+
+            return l_nemo;
+        }
+
+        for (let i = 1; i <= 10; i++) {
+            for (let j = 1; j <= i; j++) {
+                c_disp.appendChild(f_nemo("*"));
+            }
+            c_disp.innerHTML += "<br>";
+        }
+
+        function empty() {
+            let l_empty = document.createElement("div");
+            l_empty.setAttribute("class", "empty");
+            l_empty.innerHTML = 0;
+            return l_empty;
+
+        }
+
+        c_disp.innerHTML += "<br>";
+
+        for (let i = 9; i >= 0; i--) {
+            for (let j = i; j >= 0; j--) {
+                c_disp2.appendChild(f_nemo("*"));
+            }
+            c_disp2.innerHTML += "<br>";
+        }
+        c_disp2.innerHTML += "<br>";
+
+        for (let i = 1; i <= 10; i++) {
+            for (let k = 10; k > i; k--) {
+                let l_empty = document.createElement("div");
+                l_empty.setAttribute("class", "empty");
+                l_empty.innerHTML = 0;
+                c_disp3.appendChild(empty());
+            }
+            for (let j = 1; j <= i; j++) {
+
+                c_disp3.appendChild(f_nemo("*"));
+            }
+            c_disp3.innerHTML += "<br>";
+        }
+        c_disp3.innerHTML += "<br>";
+        for (let i = 9; i >= 0; i--) {
+            for (let k = i; k < 9; k++) {
+                c_disp4.appendChild(empty());
+            }
+            for (let j = i; j >= 0; j--) {
+                c_disp4.appendChild(f_nemo("*"));
+
+            }
+            c_disp4.innerHTML += "<br>";
+        }
+        c_disp4.innerHTML += "<br>";
+
+    </script>
+</body>
+
+</html>
