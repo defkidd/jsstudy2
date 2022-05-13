@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <select name="" id="id_sel1">
+        <option value="aa">문제갯수를 선택해주세요</option>
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="15">15</option>
+    </select>
+    <select name="" id="id_sel2" onchange="f_ck()">
+        <option value="aa">?선다형 선택해주세요</option>
+        <option value="5">4</option>
+        <option value="8" selected>8</option>
+        <option value="12">12</option>
+    </select>
+    <script>
+        var f_ck = () => {
+            document.write("<h1>지워짐</h1>")
+        }
+        const c_munsu = document.querySelector("#id_sel1").value;
+        const c_dahyung = document.querySelector("#id_sel2").value;
+        const c_jungdaps = [];
+        let cnt = 0;
+        for (let i = 0; i < c_munsu; i++) {
+            c_jungdaps.push(Math.ceil(Math.random() * c_dahyung));
+
+        }
+        for (let i = 1; i <= c_munsu; i++) {
+            document.write("<h3>" + i + "문제</h3>");
+            for (let j = 1; j <= c_dahyung; j++) {
+                document.write(j + "&nbsp;<input type=radio name=mun" + i + " value=" + j + ">");
+
+            }
+            document.write("<hr>")
+        }
+        document.write("<input type=hidden name= nm_jung value=''>");
+
+
+    </script>
+    <br>
+    맞은개수 :<input type="text" id="id_cnt" value=""><br>
+    맞은 점수 : <input type="text" id="id_jumsu" value=""><br>
+    <input type="button" id="id_check" value="채점">
+    <script>
+        const c_check = document.querySelector("#id_check");
+        const c_cnt = document.querySelector("#id_cnt");
+        const c_score = document.querySelector("#id_jumsu");
+        const f_click = () => {
+            for (let i = 1; i <= c_munsu; i++) {
+                const c_radio = document.querySelectorAll("input[name=mun" + i + "]");
+                for (let index = 0; index < c_radio.length; index++) {
+
+                    if (c_radio[index].checked) {
+                        console.log(c_radio[index].value, c_jungdaps[i - 1]);
+                        if (c_radio[index].value == c_jungdaps[i - 1]) {
+                            cnt++;
+                        }
+                    }
+                }
+            }
+            c_cnt.value = cnt;
+            c_score.value = 100 / c_munsu * cnt;
+            document.querySelector("input[name=nm_jung]").type = "text";
+            document.querySelector("input[name=nm_jung]").value = c_jungdaps;
+        }
+        c_check.addEventListener("click", f_click)
+    </script>
+</body>
+
+</html>

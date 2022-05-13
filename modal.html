@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #id_modal {
+            /* 제일앞에 오게 */
+            z-index: 99999;
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(100, 100, 100, 0.3);
+            /* 처음에는 안보이게*/
+            display: none;
+        }
+
+        #id_content {
+            position: relative;
+            left: 40%;
+            top: 20%;
+            width: 300px;
+            height: 300px;
+            border: 1px solid pink;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="id_modal">
+        <div id="id_content">
+            <h1>모달 컨텐츠</h1>
+
+        </div>
+
+    </div>
+    <input type="button" value="모달" onclick="f_modalShow()">
+    <script>
+        const c_modal = document.querySelector("#id_modal");
+        c_modal.onclick = () => {
+            event.target.style.display = "none";
+        }
+        const f_modalShow = () => {
+            c_modal.style.display = "block"; // 보이게
+
+
+        }
+    </script>
+</body>
+
+</html>

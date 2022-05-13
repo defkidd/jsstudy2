@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper {
+            margin: 0 auto;
+            width: 500px;
+            height: 550px;
+            border: 5px solid pink;
+            position: relative;
+        }
+
+        #tjin {
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            bottom: 1px;
+        }
+
+        #id_txt {
+            width: 70%;
+            height: 50px;
+            font-size: 20px;
+            text-align: right;
+        }
+
+        #id_btn {
+            width: 28%;
+            height: 50px;
+            border: 1px solid black;
+            font-size: 20px;
+        }
+
+        #tjbg {
+            position: relative;
+            height: 495px;
+            width: 100%;
+            border: 1px solid black;
+            overflow: hidden;
+        }
+
+        .txt {
+            position: absolute;
+            background-color: black;
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="tjbg"></div>
+        <div id="tjin">
+            <input type="text" id="id_txt">
+            <input type="button" id="id_btn" value="시작">
+        </div>
+    </div>
+    <script>
+        var v_tjbg = document.querySelector("#tjbg");
+        var v_txt = document.querySelector("#id_txt");
+        var v_btn = document.querySelector("#id_btn");
+        let cnt = 0;
+
+        var f_ranGakdo = () => {
+            return "rotate(" + Math.floor(Math.random() * 360) + "deg)";
+        }
+        var f_keydown = () => {
+            if (event.keyCode === 13) {
+                var v_userInput = v_txt.value;
+                for (let i = 0; i < v_moveWords.length; i++) {
+                    if (v_moveWords[i].innerHTML === v_userInput) {
+                        v_moveWords[i].style.top = "-30px";
+                        v_moveWords.splice(i, 1)
+                        v_txt.value = "";
+                        break;
+                    }
+                }
+
+            }
+        }
+        v_txt.addEventListener("keydown", f_keydown);
+
+        var v_moveWords = []; // 움직이고 있는 단어만 담을 빈배열
+
+        var f_selWords = () => {
+            var v_ranNumber = Math.ceil(Math.random() * members.length);
+            var v_ranWord = document.querySelector("#word" + v_ranNumber);
+            var v_ranLef = Math.ceil(Math.random() * 400);
+            if (v_moveWords.indexOf(v_ranWord) == -1) {
+                v_ranWord.style.left = v_ranLef + "px";
+
+
+            }
+            v_moveWords.push(v_ranWord);
+            setTimeout(f_selWords, 800);
+
+
+            // console.log(v_moveWords);
+        }
+
+        var f_moveWords = () => {
+            cnt++;
+            for (let i = 0; i < v_moveWords.length; i++) {
+                var v_ranSpeed = Math.ceil(Math.random() * 10);
+                v_moveWords[i].style.top = parseInt(v_moveWords[i].style.top) + v_ranSpeed + "px";
+                // v_moveWords[i].style.transform = f_ranGakdo();
+                if (parseInt(v_moveWords[i].style.top) >= 400) {
+                    // v_ranSpeed = 0;
+                    v_moveWords[i].style.top = "-10px";
+                    // return;
+                }
+
+
+            }
+            // if (cnt < 25) {
+
+            setTimeout(f_moveWords, 400);
+            // }
+            console.log('ddd')
+        }
+
+        var f_start = () => {
+            f_selWords();
+            f_moveWords();
+            v_txt.focus();
+
+
+        }
+        v_btn.onclick = f_start;
+
+        // 글자를 랜덤하게 고르는 함수랑
+        // 글자를 아래방향으로 움직이는 함수를 구분하면 좋음
+        // 역할분담을 하면 중간 연결고리가 필요
+
+
+        var members = "오세현,김현준,조현,한찬길,김민혁," +
+            "경송은,김지훈,이계림,류진,신재호," +
+            "임희수,박솔재,한정수,김정선,김정진," +
+            "진예인,김희정,박경신,김예은,장윤서," +
+            "조윤주,김치훈,김광국,장현서";
+        members = members.split(","); //배열로 맹글기
+
+        //제어하기 편하게 div element로 맹글깅
+        for (var i = 0; i < members.length; i++) {
+            var v_div = document.createElement("div");
+            v_div.setAttribute("id", "word" + (i + 1));
+            v_div.innerHTML = members[i];
+            v_div.setAttribute("class", "txt");
+            v_div.style.top = "-50px";
+            v_tjbg.appendChild(v_div);
+        }
+
+
+    </script>
+</body>
+
+</html>
